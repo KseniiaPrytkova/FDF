@@ -1,24 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.h                                              :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kprytkov <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/18 18:16:19 by kprytkov          #+#    #+#             */
-/*   Updated: 2018/04/18 18:16:20 by kprytkov         ###   ########.fr       */
+/*   Created: 2018/03/12 21:04:35 by kprytkov          #+#    #+#             */
+/*   Updated: 2018/03/12 21:04:36 by kprytkov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FDF_H
-# define FDF_H
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 # include <unistd.h>
 # include <stdio.h>
 # include <stdlib.h>
-# include <fcntl.h>
-# include <sys/types.h>
 # include "libft/libft.h"
-# include "get_next_line.h"
+
+# define BUFF_SIZE 17
+# define MAX_FILES 4864
 
 int		get_next_line(const int fd, char **line);
+
 #endif
