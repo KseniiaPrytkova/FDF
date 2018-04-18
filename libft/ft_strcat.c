@@ -1,23 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.h                                              :+:      :+:    :+:   */
+/*   ft_strcat.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kprytkov <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/18 18:16:19 by kprytkov          #+#    #+#             */
-/*   Updated: 2018/04/18 18:16:20 by kprytkov         ###   ########.fr       */
+/*   Created: 2017/12/20 19:26:56 by kprytkov          #+#    #+#             */
+/*   Updated: 2017/12/20 19:26:57 by kprytkov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FDF_H
-# define FDF_H
-# include <unistd.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <fcntl.h>
-# include <sys/types.h>
-# include "libft.h"
+#include "libft.h"
 
-int		get_next_line(const int fd, char **line);
-#endif
+char	*ft_strcat(char *s1, const char *s2)
+{
+	char	*s_final;
+
+	s_final = s1;
+	while (*s1 != '\0')
+	{
+		s1++;
+	}
+	while (*s2 != '\0')
+	{
+		*s1 = *s2;
+		s1++;
+		s2++;
+	}
+	*s1 = '\0';
+	return (s_final);
+}

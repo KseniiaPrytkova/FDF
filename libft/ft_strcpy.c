@@ -1,23 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.h                                              :+:      :+:    :+:   */
+/*   ft_strcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kprytkov <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/18 18:16:19 by kprytkov          #+#    #+#             */
-/*   Updated: 2018/04/18 18:16:20 by kprytkov         ###   ########.fr       */
+/*   Created: 2017/11/29 17:07:49 by kprytkov          #+#    #+#             */
+/*   Updated: 2017/12/20 19:29:50 by kprytkov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FDF_H
-# define FDF_H
-# include <unistd.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <fcntl.h>
-# include <sys/types.h>
-# include "libft.h"
+#include "libft.h"
 
-int		get_next_line(const int fd, char **line);
-#endif
+char	*ft_strcpy(char *dst, const char *src)
+{
+	char *pointer_to_dest_start;
+
+	pointer_to_dest_start = dst;
+	while (*src != '\0')
+	{
+		*dst = *src;
+		src++;
+		dst++;
+	}
+	*dst = '\0';
+	return (pointer_to_dest_start);
+}

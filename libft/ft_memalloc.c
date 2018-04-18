@@ -1,23 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.h                                              :+:      :+:    :+:   */
+/*   ft_memalloc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kprytkov <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/18 18:16:19 by kprytkov          #+#    #+#             */
-/*   Updated: 2018/04/18 18:16:20 by kprytkov         ###   ########.fr       */
+/*   Created: 2017/12/20 18:27:34 by kprytkov          #+#    #+#             */
+/*   Updated: 2017/12/20 18:27:40 by kprytkov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FDF_H
-# define FDF_H
-# include <unistd.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <fcntl.h>
-# include <sys/types.h>
-# include "libft.h"
+#include "libft.h"
 
-int		get_next_line(const int fd, char **line);
-#endif
+void	*ft_memalloc(size_t size)
+{
+	void *place;
+
+	place = malloc(size);
+	if (place == NULL)
+		return (NULL);
+	ft_bzero(place, size);
+	return (place);
+}

@@ -1,23 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.h                                              :+:      :+:    :+:   */
+/*   ft_strncpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kprytkov <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/18 18:16:19 by kprytkov          #+#    #+#             */
-/*   Updated: 2018/04/18 18:16:20 by kprytkov         ###   ########.fr       */
+/*   Created: 2017/11/29 18:18:17 by kprytkov          #+#    #+#             */
+/*   Updated: 2017/11/29 18:18:19 by kprytkov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FDF_H
-# define FDF_H
-# include <unistd.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <fcntl.h>
-# include <sys/types.h>
-# include "libft.h"
+#include "libft.h"
 
-int		get_next_line(const int fd, char **line);
-#endif
+char	*ft_strncpy(char *dst, const char *src, size_t len)
+{
+	size_t	counter;
+	char	*pointer_to_dest_start;
+	size_t	src_len;
+
+	pointer_to_dest_start = dst;
+	src_len = ft_strlen(src);
+	counter = 0;
+	while (counter < len)
+	{
+		if (counter < src_len)
+		{
+			*dst = *src;
+			src++;
+		}
+		else
+			*dst = '\0';
+		dst++;
+		counter++;
+	}
+	return (pointer_to_dest_start);
+}

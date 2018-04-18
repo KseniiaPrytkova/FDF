@@ -1,23 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.h                                              :+:      :+:    :+:   */
+/*   ft_putstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kprytkov <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/18 18:16:19 by kprytkov          #+#    #+#             */
-/*   Updated: 2018/04/18 18:16:20 by kprytkov         ###   ########.fr       */
+/*   Created: 2017/11/22 22:07:37 by kprytkov          #+#    #+#             */
+/*   Updated: 2017/11/22 22:07:38 by kprytkov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FDF_H
-# define FDF_H
-# include <unistd.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <fcntl.h>
-# include <sys/types.h>
-# include "libft.h"
+#include "libft.h"
 
-int		get_next_line(const int fd, char **line);
-#endif
+void	ft_putstr(char const *s)
+{
+	size_t len;
+
+	if (s == NULL)
+		return ;
+	len = ft_strlen(s);
+	if (len > 0)
+	{
+		write(1, s, len);
+	}
+}

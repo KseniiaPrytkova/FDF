@@ -1,23 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.h                                              :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kprytkov <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/18 18:16:19 by kprytkov          #+#    #+#             */
-/*   Updated: 2018/04/18 18:16:20 by kprytkov         ###   ########.fr       */
+/*   Created: 2017/11/23 17:31:54 by kprytkov          #+#    #+#             */
+/*   Updated: 2017/11/23 17:31:56 by kprytkov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FDF_H
-# define FDF_H
-# include <unistd.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <fcntl.h>
-# include <sys/types.h>
-# include "libft.h"
+#include "libft.h"
 
-int		get_next_line(const int fd, char **line);
-#endif
+void				*ft_memset(void *b, int c, size_t len)
+{
+	size_t			counter;
+	unsigned char	c_transform;
+	unsigned char	*d;
+
+	counter = 0;
+	c_transform = (unsigned char)c;
+	d = (unsigned char*)b;
+	while (counter < len)
+	{
+		d[counter] = c_transform;
+		counter++;
+	}
+	return (b);
+}

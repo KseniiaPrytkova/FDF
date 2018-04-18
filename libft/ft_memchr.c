@@ -1,23 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.h                                              :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kprytkov <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/18 18:16:19 by kprytkov          #+#    #+#             */
-/*   Updated: 2018/04/18 18:16:20 by kprytkov         ###   ########.fr       */
+/*   Created: 2017/12/08 20:09:58 by kprytkov          #+#    #+#             */
+/*   Updated: 2017/12/08 20:10:00 by kprytkov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FDF_H
-# define FDF_H
-# include <unistd.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <fcntl.h>
-# include <sys/types.h>
-# include "libft.h"
+#include "libft.h"
 
-int		get_next_line(const int fd, char **line);
-#endif
+void	*ft_memchr(const void *s, int c, size_t n)
+{
+	size_t			counter;
+	unsigned char	*pointer;
+
+	pointer = (unsigned char *)s;
+	counter = 0;
+	while (counter < n)
+	{
+		if (*pointer == (unsigned char)c)
+			return (pointer);
+		pointer++;
+		counter++;
+	}
+	return (NULL);
+}
