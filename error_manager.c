@@ -12,7 +12,7 @@
 
 #include "fdf.h"
 
-int 	is_number(char *str)
+int 			is_number(char *str)
 {
 	int			i;
 	char		ch;
@@ -47,33 +47,26 @@ int				i_will_count_lines(int fd, int nb_of_lines)
 	len_relative = 0;
 	first_time = 0;
 	ret = 0;
-
 	while ((ret = get_next_line(fd, &line)))
 	{
-			// printf("line#%i| %s\n", nb_of_lines, line);
-			if (is_number(line) == 0)
-				return (0);
-			if (first_time == 0)
-			{
-				len_absolute = ft_wordcount(line, ' ');
-				// printf("%d: 1st time! len_abs = %zu\n", nb_of_lines, len_absolute);	
-				first_time = 1;
-			}
-			else
-			{
-				len_relative = ft_wordcount(line, ' ');
-				// printf("%d: len_relative = %zu\n", nb_of_lines, len_relative);
-
-				if (len_relative != len_absolute)
-				{
-					// ft_putstr("usage: INVALID_MAP[different number of characters in lines!]\n");
-					return (0);
-				}
-			}
-			nb_of_lines++;
+		if (is_number(line) == 0)
+			return (0);
+		if (first_time == 0)
+		{
+			len_absolute = ft_wordcount(line, ' ');
+			first_time = 1;
 		}
-
-		// printf("there are %i lines! \n", nb_of_lines );
-		close(fd);
+		else
+		{
+			len_relative = ft_wordcount(line, ' ');
+			if (len_relative != len_absolute)
+			{
+				ft_putstr("usage: INVALID_MAP[different number of characters in lines!]\n");
+				return (0);
+			}
+		}
+		nb_of_lines++;
+	}
+	close(fd);
 	return (nb_of_lines);
 }
