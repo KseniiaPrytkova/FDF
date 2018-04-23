@@ -14,41 +14,20 @@
 
 int		main(int argc, char *argv[])
 {
+	int			nb_of_lines;
+	int 		fd;
+
+	nb_of_lines = 0;
+	fd = 0;
 	if (argc == 2)
 	{
-		int		fd;
-		int		ret;
-		char	*line;
-		int		counter;
-		int		len_absolute;
-		int		len_relative;
-
-		int		first_time;
-
 		fd = open(argv[1], O_RDONLY);
-		ret = 0;
-		counter = 0;
-		first_time = 0;
-		len_absolute = 0;
-		while ((ret = get_next_line(fd, &line)))
-		{
-			if (first_time == 0)
-			{
-				len_absolute = ft_strlen(line);
-				printf("%d: 1st time! len_abs = %d\n", counter, len_absolute);
-				first_time = 1;
-			}
-			printf("just_line: %zu\n", ft_strlen(line));
-			if (ft_strlen(line) != len_absolute)
-			{
-				ft_putstr("usage: invalid_map\n");
-				return (0);
-			}
-			counter++;
+		nb_of_lines = i_will_count_lines(fd, nb_of_lines);
+		printf("THERE R %d LINES IN MAP:\n", nb_of_lines);
 
-		}
-		printf("%i\n", counter );
-		close(fd);
+		if(nb_of_lines != 0)
+			printf("GOOD MAP!\n");
+		
 
 	}
 	return (0);

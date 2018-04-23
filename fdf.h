@@ -21,4 +21,7 @@
 # include "get_next_line.h"
 
 int		get_next_line(const int fd, char **line);
+int		i_will_count_lines(int fd, int nb_of_lines);
+
+
 #endif

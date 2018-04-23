@@ -12,4 +12,68 @@
 
 #include "fdf.h"
 
-/*ft_putstr("usage: fillit map_file\n");*/
+int 	is_number(char *str)
+{
+	int			i;
+	char		ch;
+
+	i = 0;
+	ch = 0;
+	while (str[i] != '\0')
+	{
+		ch = str[i];
+		if (ch == ' ' || ch == '\t' || ch == '\n')
+			i++;
+		else if (ch >= '0' && ch <= '9')
+			i++;
+		else
+		{
+			ft_putstr("usage: INVALID_MAP[i understand numbers only!]\n");
+			return (0);
+		}
+	}
+	return (1);
+}
+
+int				i_will_count_lines(int fd, int nb_of_lines)
+{
+	size_t		len_absolute;
+	size_t		len_relative;
+	int			first_time;
+	int			ret;
+	char		*line;
+
+	len_absolute = 0;
+	len_relative = 0;
+	first_time = 0;
+	ret = 0;
+
+	while ((ret = get_next_line(fd, &line)))
+	{
+			// printf("line#%i| %s\n", nb_of_lines, line);
+			if (is_number(line) == 0)
+				return (0);
+			if (first_time == 0)
+			{
+				len_absolute = ft_wordcount(line, ' ');
+				// printf("%d: 1st time! len_abs = %zu\n", nb_of_lines, len_absolute);	
+				first_time = 1;
+			}
+			else
+			{
+				len_relative = ft_wordcount(line, ' ');
+				// printf("%d: len_relative = %zu\n", nb_of_lines, len_relative);
+
+				if (len_relative != len_absolute)
+				{
+					// ft_putstr("usage: INVALID_MAP[different number of characters in lines!]\n");
+					return (0);
+				}
+			}
+			nb_of_lines++;
+		}
+
+		// printf("there are %i lines! \n", nb_of_lines );
+		close(fd);
+	return (nb_of_lines);
+}
