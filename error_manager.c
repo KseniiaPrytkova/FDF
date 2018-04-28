@@ -12,7 +12,7 @@
 
 #include "fdf.h"
 
-int 			is_number(char *str)
+static int 			is_number(char *str)
 {
 	int			i;
 	char		ch;
@@ -24,7 +24,7 @@ int 			is_number(char *str)
 		ch = str[i];
 		if (ch == ' ' || ch == '\t' || ch == '\n')
 			i++;
-		else if (ch >= '0' && ch <= '9')
+		else if ((ch >= '0' && ch <= '9') || ch == '-')
 			i++;
 		else
 		{
@@ -35,22 +35,20 @@ int 			is_number(char *str)
 	return (1);
 }
 
-int				i_will_count_lines(int fd, int nb_of_lines)
+void				i_will_count_lines(t_env *e)
 {
 	size_t		len_absolute;
 	size_t		len_relative;
 	int			first_time;
-	int			ret;
 	char		*line;
 
 	len_absolute = 0;
 	len_relative = 0;
 	first_time = 0;
-	ret = 0;
-	while ((ret = get_next_line(fd, &line)))
+	while (get_next_line(e->fd, &line))
 	{
 		if (is_number(line) == 0)
-			return (0);
+			return ;
 		if (first_time == 0)
 		{
 			len_absolute = ft_wordcount(line, ' ');
@@ -62,11 +60,10 @@ int				i_will_count_lines(int fd, int nb_of_lines)
 			if (len_relative != len_absolute)
 			{
 				ft_putstr("usage: INVALID_MAP[different number of characters in lines!]\n");
-				return (0);
+				return ;
 			}
 		}
-		nb_of_lines++;
+		e->l_nb++;
 	}
-	close(fd);
-	return (nb_of_lines);
+	close(e->fd);
 }

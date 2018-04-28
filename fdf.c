@@ -14,21 +14,33 @@
 
 int		main(int argc, char *argv[])
 {
-	int			nb_of_lines;
-	int 		fd;
+	t_env *e;
 
-	nb_of_lines = 0;
-	fd = 0;
+	if ((e = (t_env *)malloc(sizeof(t_env))) == NULL)
+	{
+		ft_putstr("bad malloc");
+		return (0);
+	}
+	e->l_nb = 0;
+	e->map_name = argv[1];
 	if (argc == 2)
 	{
-		fd = open(argv[1], O_RDONLY);
-		nb_of_lines = i_will_count_lines(fd, nb_of_lines);
-		printf("THERE R %d LINES IN MAP:\n", nb_of_lines);
-
-		if(nb_of_lines != 0)
+		e->fd = open(e->map_name, O_RDONLY);
+		i_will_count_lines(e);
+		printf("THERE R %d LINES IN MAP:\n", e->l_nb);
+		if(e->l_nb != 0)
 			printf("GOOD MAP!\n");
 		
-
+		e->fd = open(argv[1], O_RDONLY);
+		i_will_read(e);
+		close(e->fd);
+		for (int i = 0; i < e->l_nb ; i++)
+		{
+			for (int j = 0; j < e->p_nb; i++)
+			{
+				printf("-x: %d -y: %d -z: %d", e->map[i][j].x, e->map[i][j].y, e->map[i][j].z);
+			}
+		}
 	}
 	return (0);
 }
