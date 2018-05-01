@@ -52,6 +52,7 @@ void				i_will_count_lines(t_env *e)
 		if (first_time == 0)
 		{
 			len_absolute = ft_wordcount(line, ' ');
+			e->p_nb = len_absolute;
 			first_time = 1;
 		}
 		else

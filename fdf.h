@@ -45,9 +45,10 @@ typedef struct s_env
 	void *win;
 }				t_env;
 
-int		get_next_line(const int fd, char **line);
-void				i_will_count_lines(t_env *e);
-char		**ft_split(char *str);
-void i_will_read(t_env *e);
+int				get_next_line(const int fd, char **line);
+void			i_will_count_lines(t_env *e);
+// char			**ft_split(char *str, t_env *e);
+char			**ft_split(char *str);
+void 			i_will_read(t_env *e);
 
 #endif

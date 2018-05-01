@@ -16,7 +16,7 @@ int		main(int argc, char *argv[])
 {
 	t_env *e;
 
-	if ((e = (t_env *)malloc(sizeof(t_env))) == NULL)
+	if (!(e = (t_env *)malloc(sizeof(t_env))))
 	{
 		ft_putstr("bad malloc");
 		return (0);
@@ -34,13 +34,16 @@ int		main(int argc, char *argv[])
 		e->fd = open(argv[1], O_RDONLY);
 		i_will_read(e);
 		close(e->fd);
-		for (int i = 0; i < e->l_nb ; i++)
-		{
-			for (int j = 0; j < e->p_nb; i++)
-			{
-				printf("-x: %d -y: %d -z: %d", e->map[i][j].x, e->map[i][j].y, e->map[i][j].z);
-			}
-		}
+
+		// printf("%d\n", e->map[0][0].x, e->map[0][0].y, e->map[0][0].z);
+		
+		// for (int i = 0; i < e->l_nb ; i++)
+		// {
+		// 	for (int j = 0; j < e->p_nb; i++)
+		// 	{
+		// 		printf("-x: %d -y: %d -z: %d", e->map[i][j].x, e->map[i][j].y, e->map[i][j].z);
+		// 	}
+		// }
 	}
 	return (0);
 }

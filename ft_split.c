@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "fdf.h"
 
 static char		*i_will_malloc(char *str)
 {
@@ -19,7 +20,8 @@ static char		*i_will_malloc(char *str)
 	i = 0;
 	while (str[i] && str[i] != ' ' && str[i] != '\n' && str[i] != '\t')
 		i++;
-	word = (char *)malloc(sizeof(char) * (i + 1));
+	if (!(word = (char *)malloc(sizeof(char) * (i + 1))))
+		return (NULL);
 	i = 0;
 	while (str[i] && str[i] != ' ' && str[i] != '\n' && str[i] != '\t')
 	{
@@ -49,6 +51,7 @@ static int			i_will_count_ws(char *str)
 	return (count);
 }
 
+// char		**ft_split(char *str, t_env *e)
 char		**ft_split(char *str)
 {
 	char	**str_array;
@@ -56,7 +59,8 @@ char		**ft_split(char *str)
 	int		counter;
 
 	how_much_words = i_will_count_ws(str);
-	str_array = (char **)malloc(sizeof(char*) * (how_much_words + 1));
+	if (!(str_array = (char **)malloc(sizeof(char*) * (how_much_words + 1))))
+		return (NULL);
 	counter = 0;
 	while (*str)
 	{
@@ -71,5 +75,18 @@ char		**ft_split(char *str)
 		}
 	}
 	str_array[counter] = NULL;
+
+	//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+	// int i = 0;
+	// printf("I'M IN SPLIT!!!!");
+	// printf("There r %d words in line\n", how_much_words);
+	// printf("%d\n", e->p_nb);
+	// while (i < how_much_words)
+	// 	{
+	// 		printf("%s\n", str_array[i]);
+	// 		i++;
+	// 	}
+	//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
 	return (str_array);
 }
