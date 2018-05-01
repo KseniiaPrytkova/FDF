@@ -31,18 +31,19 @@ typedef struct s_point
 	int 	x_before;
 	int 	y_before;
 	int 	z_before;
+	// int 	*map_line;
 
 }				t_point;
 
-typedef struct s_env
+typedef struct 	s_env
 {
-	int l_nb; //количество строк в карте
-	int p_nb;  //количество точек в каждой строке
-	t_point **map;
-	int fd;
-	char *map_name; // argv
-	void *mlx;
-	void *win;
+	int 		l_nb; //количество строк в карте
+	int 		p_nb;  //количество точек в каждой строке
+	t_point 	**map;
+	int 		fd;
+	char 		*map_name; // argv
+	void 		*mlx;
+	void 		*win;
 }				t_env;
 
 int				get_next_line(const int fd, char **line);
