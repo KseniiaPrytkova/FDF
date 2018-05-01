@@ -31,7 +31,8 @@ typedef struct s_point
 	int 	x_before;
 	int 	y_before;
 	int 	z_before;
-	// int 	*map_line;
+	// char	*color_box;
+	
 
 }				t_point;
 
