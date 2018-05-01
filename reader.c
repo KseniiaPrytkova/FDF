@@ -69,17 +69,17 @@ void 		i_will_read(t_env *e)
 
 	//>>>
 	//I WILL PRINT IT!!!
-	i = 0;
-	while (i <  e->l_nb)
-	{
-		printf("line %d :\n", i);
-		j = 0;
-		while (j < e->p_nb)
-		{
-			printf("sb %d : %d_%d_%d\n",  j, e->map[i][j].x, e->map[i][j].y, e->map[i][j].z);
-			j++;
-		}
-		i++;
-	}
+	// i = 0;
+	// while (i <  e->l_nb)
+	// {
+	// 	printf("line %d :\n", i);
+	// 	j = 0;
+	// 	while (j < e->p_nb)
+	// 	{
+	// 		printf("sb %d : %d_%d_%d\n",  j, e->map[i][j].x, e->map[i][j].y, e->map[i][j].z);
+	// 		j++;
+	// 	}
+	// 	i++;
+	// }
 	//>>>
 }
