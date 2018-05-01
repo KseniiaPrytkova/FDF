@@ -26,10 +26,13 @@ int		main(int argc, char *argv[])
 	if (argc == 2)
 	{
 		e->fd = open(e->map_name, O_RDONLY);
-		i_will_count_lines(e);
-		printf("THERE R %d LINES IN MAP:\n", e->l_nb);
-		if(e->l_nb != 0)
+		if (i_will_count_lines(e) == 1)
+		{
+			printf("THERE R %d LINES IN MAP:\n", e->l_nb);
 			printf("GOOD MAP!\n");
+		}
+		else
+			return (0);
 		
 		e->fd = open(argv[1], O_RDONLY);
 		i_will_read(e);
@@ -42,7 +45,7 @@ int		main(int argc, char *argv[])
 			int j = 0;
 			while (j < e->p_nb)
 			{
-				printf("%-3d", e->map[i][j].z);
+				printf("%4d", e->map[i][j].z);
 				j++;
 			}
 			printf("\n");

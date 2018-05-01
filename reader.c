@@ -52,34 +52,9 @@ void 		i_will_read(t_env *e)
 
 		get_next_line(e->fd, &line);
 		after_split = ft_split(line);
-		//>>>>>>>>>
-		// printf("i'm the nb of lines!!! %d\n", e->p_nb);
-		// while (i < e->p_nb)
-		// {
-		// 	printf("%s\n", after_split[i]);
-		// 	i++;
-		// }
-		// i = 0;
-		//>>>>>>>>>	
 		e->map[counter] = map_maker(after_split, counter, e);
 		counter++;
 
 	}
 	e->map[e->l_nb] = NULL;
-
-	//>>>
-	//I WILL PRINT IT!!!
-	// i = 0;
-	// while (i <  e->l_nb)
-	// {
-	// 	printf("line %d :\n", i);
-	// 	j = 0;
-	// 	while (j < e->p_nb)
-	// 	{
-	// 		printf("sb %d : %d_%d_%d\n",  j, e->map[i][j].x, e->map[i][j].y, e->map[i][j].z);
-	// 		j++;
-	// 	}
-	// 	i++;
-	// }
-	//>>>
 }

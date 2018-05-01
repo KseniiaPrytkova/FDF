@@ -35,7 +35,7 @@ static int 			is_number(char *str)
 	return (1);
 }
 
-void				i_will_count_lines(t_env *e)
+int				i_will_count_lines(t_env *e)
 {
 	size_t		len_absolute;
 	size_t		len_relative;
@@ -48,11 +48,10 @@ void				i_will_count_lines(t_env *e)
 	while (get_next_line(e->fd, &line))
 	{
 		if (is_number(line) == 0)
-			return ;
+			return (0);
 		if (first_time == 0)
 		{
 			len_absolute = ft_wordcount(line, ' ');
-			e->p_nb = len_absolute;
 			first_time = 1;
 		}
 		else
@@ -61,10 +60,13 @@ void				i_will_count_lines(t_env *e)
 			if (len_relative != len_absolute)
 			{
 				ft_putstr("usage: INVALID_MAP[different number of characters in lines!]\n");
-				return ;
+				return (0);
 			}
+			else
+				e->p_nb = len_absolute;
 		}
 		e->l_nb++;
 	}
 	close(e->fd);
+	return (1);
 }
