@@ -53,6 +53,25 @@ int		main(int argc, char *argv[])
 			printf("\n");
 			i++;
 		}
+		//>>>>>>>>>>
+
+		//>>>>>>> PRINTING MAPS (print z)
+		printf(">>>>>>>>>>>>>>>>>>>>>>>> color\n");
+
+		i = 0;
+		while (i <  e->l_nb)
+		{
+			int j = 0;
+			while (j < e->p_nb)
+			{
+				printf("%4d", e->map[i][j].color);
+				j++;
+			}
+			printf("\n");
+			i++;
+		}
+		//>>>>>>>>>>
+
 	}
 	return (0);
 }

@@ -47,7 +47,7 @@ t_point *map_maker(char **after_split, int y, t_env *e)
 {
 	int		i;
 	t_point *map_vector;
-	char *str_holder;
+	// char *str_holder;
 	char *empty_box;
 
 	// int fuu;
@@ -58,39 +58,20 @@ t_point *map_maker(char **after_split, int y, t_env *e)
 		return (NULL);
 	while (i < e->p_nb)
 	{
-		str_holder = after_split[i];
-		while (*str_holder)
-		{
-			if (*str_holder == ',' && *(str_holder + 1) == '0' && (*(str_holder + 2) == 'x' || *(str_holder + 2) == 'X'))
+		printf("$$$$$$$---------------------------------------------------->>>>> %s\n", after_split[i]);
+	
+	printf("``````%zu\n", ft_strlen(after_split[i]) );
+			if (ft_strlen(after_split[i]) >= 10)
 				map_vector[i].color = 1;
-			else
+			else if (ft_strlen(after_split[i])  < 10)
 				map_vector[i].color = 0;
-			// {
-			// 	if (!(empty_box = (char*)malloc(sizeof(char) * (how_much_u_need(str_holder + 1) + 1))))
-			// 		return (0);
-			// 	empty_box = make_home_for_hex((str_holder + 1), empty_box);
-			// 	printf(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>%s\n", empty_box );
-			// 	map_vector[i].color_box = ft_memalloc(how_much_u_need(empty_box) + 1);
-			// 	printf(">>>>>>>>>>>>>>+++%s\n", map_vector[i].color_box);
-			// 	map_vector[i].color_box = ft_strcpy(map_vector[i].color_box, empty_box);
-			// 	free (empty_box);
-			// 	map_vector[i].color = 1;
-			// 	printf("EMPTY BOX>>>> %d\n", map_vector[i].color);
-			// }
-			str_holder++;
-		}
-
+		
 		map_vector[i].x = i;
 		map_vector[i].y = y;
 		map_vector[i].z = ft_atoi(after_split[i]);
 		map_vector[i].x_before = i;
 		map_vector[i].y_before = y;
 		map_vector[i].z_before = map_vector[i].z;
-
-		// if (fuu == 1)
-		// 	map_vector[i].color = 1;
-		// else
-		// 	map_vector[i].color = 0;
 
 		printf("line %d  : %d %d %d %d\n", i, map_vector[i].x, map_vector[i].y, map_vector[i].z, map_vector[i].color);
 		i++;
