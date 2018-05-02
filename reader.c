@@ -41,6 +41,7 @@ char *make_home_for_hex(char *s, char *empty_box)
 	empty_box[i] = '\0';
 	return (empty_box);
 }
+// -------------------------------------------
 
 t_point *map_maker(char **after_split, int y, t_env *e)
 {
@@ -49,6 +50,9 @@ t_point *map_maker(char **after_split, int y, t_env *e)
 	char *str_holder;
 	char *empty_box;
 
+	// int fuu;
+
+	// fuu = 0;
 	i = 0;
 	if (!(map_vector = (t_point*)malloc(sizeof(t_point) * e->p_nb)))
 		return (NULL);
@@ -58,19 +62,21 @@ t_point *map_maker(char **after_split, int y, t_env *e)
 		while (*str_holder)
 		{
 			if (*str_holder == ',' && *(str_holder + 1) == '0' && (*(str_holder + 2) == 'x' || *(str_holder + 2) == 'X'))
-			{
-				if (!(empty_box = (char*)malloc(sizeof(char) * (how_much_u_need(str_holder + 1) + 1))))
-					return (0);
-				empty_box = make_home_for_hex((str_holder + 1), empty_box);
-				printf(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>%s\n", empty_box );
-				map_vector[i].color_box = ft_memalloc(how_much_u_need(empty_box) + 1);
-				printf(">>>>>>>>>>>>>>+++%s\n", map_vector[i].color_box);
-				map_vector[i].color_box = ft_strcpy(map_vector[i].color_box, empty_box);
-				free (empty_box);
-				printf("EMPTY BOX>>>> %s\n", map_vector[i].color_box);
-			}
+				map_vector[i].color = 1;
 			else
-				map_vector[i].color_box = NULL;
+				map_vector[i].color = 0;
+			// {
+			// 	if (!(empty_box = (char*)malloc(sizeof(char) * (how_much_u_need(str_holder + 1) + 1))))
+			// 		return (0);
+			// 	empty_box = make_home_for_hex((str_holder + 1), empty_box);
+			// 	printf(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>%s\n", empty_box );
+			// 	map_vector[i].color_box = ft_memalloc(how_much_u_need(empty_box) + 1);
+			// 	printf(">>>>>>>>>>>>>>+++%s\n", map_vector[i].color_box);
+			// 	map_vector[i].color_box = ft_strcpy(map_vector[i].color_box, empty_box);
+			// 	free (empty_box);
+			// 	map_vector[i].color = 1;
+			// 	printf("EMPTY BOX>>>> %d\n", map_vector[i].color);
+			// }
 			str_holder++;
 		}
 
@@ -80,7 +86,13 @@ t_point *map_maker(char **after_split, int y, t_env *e)
 		map_vector[i].x_before = i;
 		map_vector[i].y_before = y;
 		map_vector[i].z_before = map_vector[i].z;
-		printf("line %d  : %d %d %d %s\n", i, map_vector[i].x, map_vector[i].y, map_vector[i].z, map_vector[i].color_box);
+
+		// if (fuu == 1)
+		// 	map_vector[i].color = 1;
+		// else
+		// 	map_vector[i].color = 0;
+
+		printf("line %d  : %d %d %d %d\n", i, map_vector[i].x, map_vector[i].y, map_vector[i].z, map_vector[i].color);
 		i++;
 	}
 	return (map_vector);

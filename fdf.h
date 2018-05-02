@@ -31,7 +31,7 @@ typedef struct s_point
 	int 	x_before;
 	int 	y_before;
 	int 	z_before;
-	char	*color_box;
+	int		color;
 	
 
 }				t_point;

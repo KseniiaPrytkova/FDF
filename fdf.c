@@ -47,13 +47,7 @@ int		main(int argc, char *argv[])
 			int j = 0;
 			while (j < e->p_nb)
 			{
-				if (e->map[i][j].color_box != NULL)
-				{
-					printf("%4s\n", e->map[i][j].color_box);
-					printf("%4d", e->map[i][j].z);
-				}
-				else
-					printf("%4d", e->map[i][j].z);
+				printf("%4d", e->map[i][j].z);
 				j++;
 			}
 			printf("\n");
