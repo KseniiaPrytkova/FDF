@@ -38,20 +38,27 @@ int		main(int argc, char *argv[])
 		i_will_read(e);
 		close(e->fd);
 
-		//>>>>>>> PRINTING MAPS
+		//>>>>>>> PRINTING MAPS (print z)
+		printf(">>>>>>>>>>>>>>>>>>>>>>>> Z\n");
+
 		int i = 0;
 		while (i <  e->l_nb)
 		{
 			int j = 0;
 			while (j < e->p_nb)
 			{
-				printf("%4d", e->map[i][j].z);
+				if (e->map[i][j].color_box != NULL)
+				{
+					printf("%4s\n", e->map[i][j].color_box);
+					printf("%4d", e->map[i][j].z);
+				}
+				else
+					printf("%4d", e->map[i][j].z);
 				j++;
 			}
 			printf("\n");
 			i++;
 		}
-		//>>>>>>>
 	}
 	return (0);
 }

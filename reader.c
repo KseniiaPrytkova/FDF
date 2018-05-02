@@ -42,7 +42,7 @@ char *make_home_for_hex(char *s, char *empty_box)
 	return (empty_box);
 }
 
-static t_point *map_maker(char **after_split, int y, t_env *e)
+t_point *map_maker(char **after_split, int y, t_env *e)
 {
 	int		i;
 	t_point *map_vector;
@@ -62,10 +62,15 @@ static t_point *map_maker(char **after_split, int y, t_env *e)
 				if (!(empty_box = (char*)malloc(sizeof(char) * (how_much_u_need(str_holder + 1) + 1))))
 					return (0);
 				empty_box = make_home_for_hex((str_holder + 1), empty_box);
-				map_vector[i].color_box = empty_box;
+				printf(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>%s\n", empty_box );
+				map_vector[i].color_box = ft_memalloc(how_much_u_need(empty_box) + 1);
+				printf(">>>>>>>>>>>>>>+++%s\n", map_vector[i].color_box);
+				map_vector[i].color_box = ft_strcpy(map_vector[i].color_box, empty_box);
 				free (empty_box);
 				printf("EMPTY BOX>>>> %s\n", map_vector[i].color_box);
 			}
+			else
+				map_vector[i].color_box = NULL;
 			str_holder++;
 		}
 
@@ -75,7 +80,7 @@ static t_point *map_maker(char **after_split, int y, t_env *e)
 		map_vector[i].x_before = i;
 		map_vector[i].y_before = y;
 		map_vector[i].z_before = map_vector[i].z;
-		// printf("line %d  : %d %d %d\n", i, map_vector[i].x, map_vector[i].y, map_vector[i].z);
+		printf("line %d  : %d %d %d %s\n", i, map_vector[i].x, map_vector[i].y, map_vector[i].z, map_vector[i].color_box);
 		i++;
 	}
 	return (map_vector);
@@ -102,7 +107,6 @@ void 		i_will_read(t_env *e)
 		after_split = ft_split(line);
 
 //>>>>>>>>>
-	printf("i'm the nb of lines!!! %d\n", e->p_nb);
 	while (i < e->p_nb)
 	{
 		printf("%s\n", after_split[i]);
