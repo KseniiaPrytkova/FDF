@@ -12,15 +12,63 @@
 
 #include "fdf.h"
 
+int how_much_u_need(char *str)
+{
+	int i;
+
+	i = 0;
+	while (str[i] && str[i] != ' ' && str[i] != '\t' &&str[i] != '\n')
+		i++;
+	return (i);
+}
+
+char *make_home_for_hex(char *s, char *empty_box)
+{
+	int i;
+	int j;
+	int till;
+
+	i = 0;
+	j = 0;
+	till = how_much_u_need(s);
+	while (till > 0)
+	{
+		empty_box[i] = s[j];
+		i++;
+		j++;
+		till--;
+	}
+	empty_box[i] = '\0';
+	return (empty_box);
+}
+
 static t_point *map_maker(char **after_split, int y, t_env *e)
 {
 	int		i;
 	t_point *map_vector;
+	char *str_holder;
+	char *empty_box;
+
 	i = 0;
 	if (!(map_vector = (t_point*)malloc(sizeof(t_point) * e->p_nb)))
 		return (NULL);
 	while (i < e->p_nb)
 	{
+		str_holder = after_split[i];
+		while (*str_holder)
+		{
+			if (*str_holder == ',' && *(str_holder + 1) == '0' && (*(str_holder + 2) == 'x' || *(str_holder + 2) == 'X'))
+			{
+				if (!(empty_box = (char*)malloc(sizeof(char) * (how_much_u_need(str_holder + 1) + 1))))
+					return (0);
+				empty_box = make_home_for_hex((str_holder + 1), empty_box);
+				map_vector[i].color_box = empty_box;
+				free (empty_box);
+				printf("EMPTY BOX>>>> %s\n", map_vector[i].color_box);
+			}
+			str_holder++;
+		}
+
 		map_vector[i].x = i;
 		map_vector[i].y = y;
 		map_vector[i].z = ft_atoi(after_split[i]);
