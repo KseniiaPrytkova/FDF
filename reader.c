@@ -12,44 +12,68 @@
 
 #include "fdf.h"
 
-int how_much_u_need(char *str)
-{
-	int i;
+// int how_much_u_need(char *str)
+// {
+// 	int i;
 
-	i = 0;
-	while (str[i] && str[i] != ' ' && str[i] != '\t' &&str[i] != '\n')
-		i++;
-	return (i);
-}
+// 	i = 0;
+// 	while (str[i] && str[i] != ' ' && str[i] != '\t' &&str[i] != '\n')
+// 		i++;
+// 	return (i);
+// }
 
-char *make_home_for_hex(char *s, char *empty_box)
-{
-	int i;
-	int j;
-	int till;
+// char *make_home_for_hex(char *s, char *empty_box)
+// {
+// 	int i;
+// 	int j;
+// 	int till;
 
-	i = 0;
-	j = 0;
-	till = how_much_u_need(s);
-	while (till > 0)
-	{
-		empty_box[i] = s[j];
-		i++;
-		j++;
-		till--;
-	}
-	empty_box[i] = '\0';
-	return (empty_box);
-}
+// 	i = 0;
+// 	j = 0;
+// 	till = how_much_u_need(s);
+// 	while (till > 0)
+// 	{
+// 		empty_box[i] = s[j];
+// 		i++;
+// 		j++;
+// 		till--;
+// 	}
+// 	empty_box[i] = '\0';
+// 	return (empty_box);
+// }
+
 // -------------------------------------------
+
+int	is_it_hex(char *str)
+{
+	unsigned char ch;
+	int i;
+
+	i = 0;
+	if (*str == '0' && *(str + 1) == 'x')
+	{	
+			printf("yaya\n");
+			str = str + 2;
+			while(*str)
+			{
+				ch = (unsigned char)*str;
+				if (ft_isalnum((int)ch)!= 1)
+					return (0);
+				str++;
+			}
+			return (1);
+	}
+	else
+		return (0);
+}
 
 t_point *map_maker(char **after_split, int y, t_env *e)
 {
 	int		i;
 	t_point *map_vector;
 	// char *str_holder;
-	char *empty_box;
-
+	char *temp_box;
+// char ch;
 	// int fuu;
 
 	// fuu = 0;
@@ -58,13 +82,28 @@ t_point *map_maker(char **after_split, int y, t_env *e)
 		return (NULL);
 	while (i < e->p_nb)
 	{
-		printf("$$$$$$$---------------------------------------------------->>>>> %s\n", after_split[i]);
+	printf("$$$$$$$---------------------------------------------------->>>>> %s\n", after_split[i]);
 	
-	printf("``````%zu\n", ft_strlen(after_split[i]) );
-			if (ft_strlen(after_split[i]) >= 10)
-				map_vector[i].color = 1;
-			else if (ft_strlen(after_split[i])  < 10)
+	printf("``````%zu\n", ft_strlen(after_split[i]));
+
+		temp_box = after_split[i];
+			if (ft_strlen(temp_box) >= 10)
+			{
+				temp_box++;
+				printf("here=====>>\n");
+				printf("%s\n", temp_box);
+				if (*temp_box == ',')
+				{
+					temp_box++;
+					printf("%s\n", temp_box );
+					printf("%d\n", is_it_hex(temp_box));
+					if (is_it_hex(temp_box) == 1)
+						map_vector[i].color = ft_atoi_base(temp_box + 2, 16);
+				}
+			}
+			else if (ft_strlen(temp_box)  < 10)
 				map_vector[i].color = 0;
+
 		
 		map_vector[i].x = i;
 		map_vector[i].y = y;

@@ -52,5 +52,6 @@ int			i_will_count_lines(t_env *e);
 // char			**ft_split(char *str, t_env *e);
 char			**ft_split(char *str);
 void 			i_will_read(t_env *e);
+int			ft_atoi_base(char *nb, int base);
 
 #endif
