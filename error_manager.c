@@ -12,59 +12,6 @@
 
 #include "fdf.h"
 
-// int how_much_u_need(char *str)
-// {
-// 	int i;
-
-// 	i = 0;
-// 	while (str[i] && str[i] != ' ' && str[i] != '\t' &&str[i] != '\n')
-// 		i++;
-// 	return (i);
-// }
-
-
-
-// int	is_it_hex(char *str)
-// {
-// 	unsigned char ch;
-// 	int i;
-
-// 	i = 0;
-// 	while (*str)
-// 	{
-// 		ch = (unsigned char)*str;
-// 		if (str[i] == '0' && str[i + 1] == 'x')
-// 			 i = i + 2;
-// 		else
-// 			return (0);
-// 		if (ft_isalnum((int)ch)!= 1)
-// 			return (0);
-// 	}
-// 	return (1);
-// }
-
-// char	*it_is_my_time(char *str, char *empty_box)
-// {
-// 	// char 		*hex_box;
-// 	int 	i;
-// 	int j;
-// 	int till;
-
-// 	i = 0;
-// 	j = 0;
-// 	till = 0;
-
-// 	i = 0;
-// 	while (i < till)
-// 	{
-// 		empty_box[i] = str[j];
-// 		i++;
-// 		j++;
-		
-// 	}
-// 	empty_box[i] = '\0';
-// 	return (empty_box);
-// }
 
 static int 			is_number(char *str)
 {
@@ -88,14 +35,6 @@ static int 			is_number(char *str)
 			printf("IT'S HEX!\n");
 			while (*str && *str != ' ' && *str != '\t' && *str != '\n')
 				str++;
-			// printf("%s\n",str);
-			
-			// if (!(hex_box = (char*)malloc(sizeof(char) * (how_much_u_need(str) + 1))))
-			// 	return (0);
-			// hex_box = it_is_my_time(str, hex_box);
-			// printf("%s\n", hex_box );
-			// 	while (1) {}
-
 		}
 
 		else
@@ -137,6 +76,7 @@ int				i_will_count_lines(t_env *e)
 			else
 				e->p_nb = len_absolute;
 		}
+		free(line);
 		e->l_nb++;
 	}
 	close(e->fd);

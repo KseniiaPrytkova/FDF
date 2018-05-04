@@ -33,45 +33,10 @@ int		main(int argc, char *argv[])
 		}
 		else
 			return (0);
-		
 		e->fd = open(argv[1], O_RDONLY);
 		i_will_read(e);
 		close(e->fd);
-
-		//>>>>>>> PRINTING MAPS (print z)
-		printf(">>>>>>>>>>>>>>>>>>>>>>>> Z\n");
-
-		int i = 0;
-		while (i <  e->l_nb)
-		{
-			int j = 0;
-			while (j < e->p_nb)
-			{
-				printf("%4d", e->map[i][j].z);
-				j++;
-			}
-			printf("\n");
-			i++;
-		}
-		//>>>>>>>>>>
-
-		//>>>>>>> PRINTING MAPS (print z)
-		printf(">>>>>>>>>>>>>>>>>>>>>>>> color\n");
-
-		i = 0;
-		while (i <  e->l_nb)
-		{
-			int j = 0;
-			while (j < e->p_nb)
-			{
-				printf("%4d", e->map[i][j].color);
-				j++;
-			}
-			printf("\n");
-			i++;
-		}
-		//>>>>>>>>>>
-
 	}
+	while(1){};
 	return (0);
 }

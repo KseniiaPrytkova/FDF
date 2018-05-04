@@ -76,17 +76,14 @@ char		**ft_split(char *str)
 	}
 	str_array[counter] = NULL;
 
-	//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-	// int i = 0;
-	// printf("I'M IN SPLIT!!!!");
-	// printf("There r %d words in line\n", how_much_words);
-	// printf("%d\n", e->p_nb);
 	// while (i < how_much_words)
 	// 	{
-	// 		printf("%s\n", str_array[i]);
+	// 		free(str_array[i]);
+	// 		str_array[i] = NULL;
 	// 		i++;
 	// 	}
-	//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+	// 	free(str_array);
+
 
 	return (str_array);
 }
