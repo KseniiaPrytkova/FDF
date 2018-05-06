@@ -81,8 +81,8 @@ int					i_will_count_lines(t_env *e)
 			len_absolute = ft_wordcount(line, ' ');
 			first_time = 1;
 		}
-		else
-			helper_for_counter(len_absolute, len_relative, line, e);
+		else if (!(helper_for_counter(len_absolute, len_relative, line, e)))
+			return (0);
 		free(line);
 		e->l_nb++;
 	}
