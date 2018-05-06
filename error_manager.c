@@ -12,14 +12,18 @@
 
 #include "fdf.h"
 
-
-static int 			is_number(char *str)
+static void			i_will_echo(int nb)
 {
-	int			i;
-	char		ch;
-	char 		*hex_box;
+	if (nb == 1)
+		ft_putstr("usage: INVALID_MAP[diff nb of characters in lines!]\n");
+	else if (nb == 2)
+		ft_putstr("usage: INVALID_MAP[give me numbers only(hex && dec)]\n");
+}
 
-	int j = 0;
+static int			is_number(char *str)
+{
+	int				i;
+	char			ch;
 
 	i = 0;
 	ch = 0;
@@ -30,28 +34,40 @@ static int 			is_number(char *str)
 			str++;
 		else if ((ch >= '0' && ch <= '9') || ch == '-')
 			str++;
-		else if (ch == ',' && (*(str + 1) == '0'))
+		else if (ch == ',' && (*(str + 1) == '0')
+			&& (*(str + 2) == 'x' || *(str + 2) == 'X'))
 		{
-			printf("IT'S HEX!\n");
 			while (*str && *str != ' ' && *str != '\t' && *str != '\n')
 				str++;
 		}
-
 		else
 		{
-			ft_putstr("usage: INVALID_MAP[i understand numbers only!]\n");
+			i_will_echo(2);
 			return (0);
 		}
 	}
 	return (1);
 }
 
-int				i_will_count_lines(t_env *e)
+static int			helper_for_counter(int abs, int rel, char *line, t_env *e)
 {
-	size_t		len_absolute;
-	size_t		len_relative;
-	int			first_time;
-	char		*line;
+	rel = ft_wordcount(line, ' ');
+	if (rel != abs)
+	{
+		i_will_echo(1);
+		return (0);
+	}
+	else
+		e->p_nb = abs;
+	return (1);
+}
+
+int					i_will_count_lines(t_env *e)
+{
+	size_t			len_absolute;
+	size_t			len_relative;
+	int				first_time;
+	char			*line;
 
 	len_absolute = 0;
 	len_relative = 0;
@@ -66,16 +82,7 @@ int				i_will_count_lines(t_env *e)
 			first_time = 1;
 		}
 		else
-		{
-			len_relative = ft_wordcount(line, ' ');
-			if (len_relative != len_absolute)
-			{
-				ft_putstr("usage: INVALID_MAP[different number of characters in lines!]\n");
-				return (0);
-			}
-			else
-				e->p_nb = len_absolute;
-		}
+			helper_for_counter(len_absolute, len_relative, line, e);
 		free(line);
 		e->l_nb++;
 	}
