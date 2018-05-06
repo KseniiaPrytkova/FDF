@@ -37,21 +37,6 @@ int		main(int argc, char *argv[])
 		i_will_read(e);
 		close(e->fd);
 	}
-
-printf(">>>>>>>>>>>>>>>>>>>>>>>> Z\n");
- 
- 		int i = 0;
- 		while (i <  e->l_nb)
- 		{
- 			int j = 0;
- 			while (j < e->p_nb)
- 			{
- 				printf("%4d", e->map[i][j].z);
- 				j++;
- 			}
- 			printf("\n");
- 			i++;
- 		}
 	// while(1){};
 	return (0);
 }

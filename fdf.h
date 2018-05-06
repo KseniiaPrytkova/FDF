@@ -23,35 +23,32 @@
 # define WIDTH 1000
 # define HEIGHT 600
 
-typedef struct s_point
+typedef struct	s_point
 {
-	int		x;
-	int		y;
-	int		z;
-	int 	x_before;
-	int 	y_before;
-	int 	z_before;
-	int		color;
-	
-
+	int			x;
+	int			y;
+	int			z;
+	int			x_before;
+	int			y_before;
+	int			z_before;
+	int			color;
 }				t_point;
 
-typedef struct 	s_env
+typedef struct	s_env
 {
-	int 		l_nb; //количество строк в карте
-	int 		p_nb;  //количество точек в каждой строке
-	t_point 	**map;
-	int 		fd;
-	char 		*map_name; // argv
-	void 		*mlx;
-	void 		*win;
+	int			l_nb; /*количество строк в карте*/
+	int			p_nb; /*количество точек в каждой строке*/
+	t_point		**map;
+	int			fd;
+	char		*map_name; /*argv*/
+	void		*mlx;
+	void		*win;
 }				t_env;
 
 int				get_next_line(const int fd, char **line);
-int			i_will_count_lines(t_env *e);
-// char			**ft_split(char *str, t_env *e);
+int				i_will_count_lines(t_env *e);
 char			**ft_split(char *str);
-void 			i_will_read(t_env *e);
-int			ft_atoi_base(char *nb, int base);
+void			i_will_read(t_env *e);
+int				ft_atoi_base(char *nb, int base);
 
 #endif

@@ -40,7 +40,7 @@ char	*join_me(char *s1, char const *s2)
 
 char	*i_am_for_reading(int fd, char *result_string)
 {
-	int		read_bytes;
+	int			read_bytes;
 	char		buffer_for_read[BUFF_SIZE + 1];
 	size_t		res_str_len;
 
@@ -96,9 +96,9 @@ char	*string_sub(char *s, unsigned int start, size_t len)
 int		get_next_line(const int fd, char **line)
 {
 	static char	*result_string[MAX_FILES];
-	int		counter;
+	int			counter;
 	char		*buffer;
-	int		str_len;
+	int			str_len;
 
 	if (fd < 0 || fd > MAX_FILES || BUFF_SIZE < 0 || line == NULL)
 		return (-1);

@@ -12,7 +12,7 @@
 
 #include "fdf.h"
 
-static char		*i_will_malloc(char *str)
+static char			*i_will_malloc(char *str)
 {
 	char	*word;
 	int		i;
@@ -51,8 +51,7 @@ static int			i_will_count_ws(char *str)
 	return (count);
 }
 
-// char		**ft_split(char *str, t_env *e)
-char		**ft_split(char *str)
+char				**ft_split(char *str)
 {
 	char	**str_array;
 	int		how_much_words;
@@ -75,15 +74,5 @@ char		**ft_split(char *str)
 		}
 	}
 	str_array[counter] = NULL;
-
-	// while (i < how_much_words)
-	// 	{
-	// 		free(str_array[i]);
-	// 		str_array[i] = NULL;
-	// 		i++;
-	// 	}
-	// 	free(str_array);
-
-
 	return (str_array);
 }
