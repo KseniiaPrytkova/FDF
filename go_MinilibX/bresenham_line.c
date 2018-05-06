@@ -1,8 +1,14 @@
-#include <unistd.h>
-#include <math.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include "mlx.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   bresenham_line.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kprytkov <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/05/06 20:05:37 by kprytkov          #+#    #+#             */
+/*   Updated: 2018/05/06 20:05:38 by kprytkov         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 int		ft_max(int d_x, int d_y, int max_d)
 {
@@ -81,29 +87,4 @@ void 	ft_bresenham(int x_0, int x_1, int y_0, int y_1, void *mlx_ptr, void *win_
 			}
         }
 	}
-}
-
-void		ft_putchar(char c)
-{
-	write(1, &c, 1);
-}
-
-int			deal_key(int key, void *param)
-{
-	ft_putchar('X');
-	return (0);
-}
-
-int			main(void)
-{
-	void	*mlx_ptr;
-	void	*win_ptr;
-
-	mlx_ptr = mlx_init();
-	win_ptr = mlx_new_window(mlx_ptr, 500, 500, "mlx 42");
-	// mlx_pixel_put(mlx_ptr, win_ptr, 50, 40, 8388352);
-	// mlx_key_hook(win_ptr, deal_key, (void *)0);
-	ft_bresenham(50, 450, 30, 200, mlx_ptr, win_ptr);
-	mlx_loop(mlx_ptr);
-	return (0);
 }
