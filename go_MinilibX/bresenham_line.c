@@ -23,68 +23,66 @@ int		ft_max(int d_x, int d_y, int max_d)
 
 void 	ft_bresenham(int x_0, int x_1, int y_0, int y_1, void *mlx_ptr, void *win_ptr)
 {
-	int 	delta_x;
-	int		delta_y;
-	int 	length_x;
-	int 	length_y;
-	int 	max_length;
-	// int		incline_Y;
-	// int		incline_X;
-	// incline_Y = 0;
-	// incline_X = 0;
+	int 	dx;
+	int		dy;
+	int 	s_x;
+	int 	s_y;
+	int 	max_delta;
 
-	delta_x = (x_1 - x_0 >= 0 ? 1 : -1);
-    delta_y = (y_1 - y_0 >= 0 ? 1 : -1);
-
-    length_x = abs(x_1 - x_0);
-    length_y = abs(y_1 - y_0);
-    max_length = ft_max(length_x, length_y, max_length);
-      
-    if (max_length == 0)
-    {
+	dx = abs(x_1 - x_0);
+	if ((x_1 - x_0) >= 0)
+		s_x = 1;
+	else
+		s_x = 0;
+    
+    dy = abs(y_1 - y_0);
+    
+    if ((y_1 - y_0) >= 0)
+		s_y = 1;
+	else
+		s_y = 0; 
+    max_delta = ft_max(dx, dy, max_delta);    
+    if (max_delta == 0)
 		mlx_pixel_put(mlx_ptr, win_ptr, x_0, y_0, 8388352);
-	}
- 
-	if (length_y <= length_x)
+	if (dy <= dx)
 	{
-		// Начальные значения
 		int x = x_0;
 		int y = y_0;
-		int d = -length_x;
+		int d = -dx;
 
-		// Основной цикл
-		max_length++;
-		while(max_length--)
+		max_delta = max_delta + 1;
+		while(max_delta != 0)
 		{
 			mlx_pixel_put(mlx_ptr, win_ptr, x, y, 8388352);
-			x += delta_x;
-			d += 2 * length_y;
+			x = x + s_x;
+			
+			d = d + (2 * dy);
 			if (d > 0) 
 			{
-				d -= 2 * length_x;
-				y += delta_y;
+				d = d - (2 * dx);
+				y = y + s_y;
 			}
+			max_delta--;
 		}
 	}
 	else
 	{
-		// Начальные значения
 		int x = x_1;
 		int y = y_1;
-		int d = - length_y;
-		
-		// Основной цикл
-		max_length++;
-		while(max_length--)
+		int d = -dy;
+
+		max_delta = max_delta + 1;
+		while(max_delta != 0)
 		{
 			mlx_pixel_put(mlx_ptr, win_ptr, x, y, 8388352);
-			y += delta_y;
-			d += 2 * length_x;
+			y = y + s_y;
+			d = d + 2 * dx;
 			if (d > 0)
 			{
-				d -= 2 * length_y;
-				x += delta_x;
+				d = d - (2 * dy);
+				x = x + s_x;
 			}
+			max_delta--;
         }
 	}
 }
