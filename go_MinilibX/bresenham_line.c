@@ -10,77 +10,75 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_max(int d_x, int d_y, int max_d)
+#include "bresenham_line.h"
+
+/* if dy <= dx */
+static	void		ft_draw_dx(t_env *e)
 {
-	if (d_y < d_x)
-		max_d = d_x;
-	else if (d_y > d_x)
-		max_d = d_y;
-	else if (d_y == d_x)
-		max_d = 0;
-	return (max_d);
+	/* PIXEL IS A BOX! LINE IS AN ABSTRACT SEQUENCE OF POINTS. */
+	/* THE IDEA IS TO FIGURE OUT WHICH PIXEL IS CLOSER TO THE ABSTACT POINT. */
+	/* ABSTACT POINT IS AN INFINATELY SMALL THAT'S WHY WE MAY COLOR ONLY THE PIXEL */
+	/* (WHICH REPRESENTS THE POINT) */
+	int	error; /* DISTANCE BEETWEN THE ABSTACT LINE AND THE NEXT PIXEL */
+	int	i;
+	int	x;
+	int	y;
+
+	error = (e->dy << 1) - e->dx;
+	x = e->x0 + e->step_x; /* STEP TO THE NEXT PIX */
+	y = e->y0;
+	i = 1; /* NOT 0 cause we put the first pixel on the next */
+	mlx_pixel_put(e->mlx, e->win, e->x0, e->y0, e->line_color); // PUT THE FIRST PIXEL */
+	while (i <= e->dx) /* UNTILL Y < Y_MAX or UNTILL THE END OF THE */
+	{
+		if (error > 0) /* IF THE ABSTRACT  IS CLOSER TO THE NEXT PIXEL THAN CURRENT */
+		{
+			y += e->step_y; /* CURRENT PIXEL = NEW PIXEL */
+			error += (e->dy - e->dx) << 1;
+		}
+		else
+			error += e->dy << 1;
+		mlx_pixel_put(e->mlx, e->win, x, y, e->line_color);
+		x += e->step_x; /* EACH STEP X += STEP; */
+		i++;
+	}
+}
+/* if dy >= dx */
+static	void		ft_draw_dy(t_env *e)
+{
+	int	error;
+	int	i;
+	int	x;
+	int	y;
+
+	error = (e->dx << 1) - e->dy;
+	y = e->y0 + e->step_y;
+	x = e->x0;
+	i = 1;
+	mlx_pixel_put(e->mlx, e->win, e->x0, e->y0, e->line_color);
+	while (i <= e->dy)
+	{
+		if (error > 0)
+		{
+			error += (e->dx - e->dy) << 1;
+			x += e->step_x;
+		}
+		else
+			error += e->dx << 1;
+		mlx_pixel_put(e->mlx, e->win, x, y, e->line_color);
+		y += e->step_y;
+		i++;
+	}
 }
 
-void 	ft_bresenham(int x_0, int y_0, int x_1, int y_1, void *mlx_ptr, void *win_ptr, int color)
+void				bresenham_line(t_env *e)
 {
-	int 	dx;
-	int		dy;
-	int 	s_x;
-	int 	s_y;
-	int 	max_delta;
-
-	dx = abs(x_1 - x_0);
-	if ((x_1 - x_0) >= 0)
-		s_x = 1;
+	e->dx = abs(e->x1 - e->x0); /* delta x */
+	e->dy = abs(e->y1 - e->y0); /* delta y */
+	e->step_x = e->x1 >= e->x0 ? 1 : -1; /* stepx if line (from left to right) = +1 ; else = -1 */
+	e->step_y = e->y1 >= e->y0 ? 1 : -1; /* stepy if line (from up to down) = +1 ; else = -1 */
+	if (e->dx > e->dy)
+		ft_draw_dx(e);
 	else
-		s_x = 0;
-    dy = abs(y_1 - y_0);
-    if ((y_1 - y_0) >= 0)
-		s_y = 1;
-	else
-		s_y = 0; 
-    max_delta = ft_max(dx, dy, max_delta);    
-    if (max_delta == 0)
-		mlx_pixel_put(mlx_ptr, win_ptr, x_0, y_0, color);
-	if (dy <= dx)
-	{
-		printf("y <= dx\n");
-		int x = x_0;
-		int y = y_0;
-		int d = -dx;
-
-		max_delta++;
-		while(max_delta--)
-		{
-			mlx_pixel_put(mlx_ptr, win_ptr, x, y, color);
-			printf("%d %d\n",x, y);
-			x = x + s_x;
-			// d = d + (2 * dy);
-			d = d + (dy << 1);
-			if (d > 0) 
-			{
-				d = d - (2 * dx);
-				y = y + s_y;
-			}
-		}
-	}
-	else
-	{
-		int x = x_1;
-		int y = y_1;
-		int d = -dy;
-
-		max_delta++;
-		while(max_delta--)
-		{
-			mlx_pixel_put(mlx_ptr, win_ptr, x, y, color);
-			y = y + s_y;
-			d = d + 2 * dx;
-			if (d > 0)
-			{
-				d = d - (2 * dy);
-				x = x + s_x;
-			}
-        }
-	}
+		ft_draw_dy(e);
 }
