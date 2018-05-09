@@ -37,6 +37,21 @@ int		main(int argc, char *argv[])
 		i_will_read(e);
 		close(e->fd);
 	}
+
+	e->mlx = mlx_init();
+	e->win = mlx_new_window(e->mlx, WIDTH, HEIGHT, "mlx 42");
+	for (int i = 0; i <= 50000; i++)
+	{
+		e->x0 = (WIDTH / 4 + random()) % (WIDTH - 1) - WIDTH / 4;
+ 		e->x1 = (random() % WIDTH - 1);
+ 		e->y0 = random() % HEIGHT - 1;
+ 		e->y1 = random() % HEIGHT - 1;
+ 		e->line_color = random();
+ 		mlx_pixel_put(e->mlx, e->win, e->x0, e->y0, e->line_color);
+ 		//bresenham_line(e);
+	}
+	mlx_loop(e->mlx);
+
 	// while(1){};
 	return (0);
 }
