@@ -36,25 +36,31 @@ int			main(void)
 	// mlx_pixel_put(mlx_ptr, win_ptr, 50, 40, 8388352);
 	// mlx_key_hook(win_ptr, deal_key, (void *)0);
 
+	e->x0 = 0;
+	e->x1 = WIDTH;
+	e->y0 = 0;
+	e->y1 = HEIGHT;
+	e->line_color = 8388352;
+	bresenham_line(e);
 /* ************************************************************************** */
-	for (int j = 0; j < HEIGHT; j++)
-	{
-		e->x0 = 0 + WIDTH / 2;
-		e->x1 = WIDTH;
-		e->y0 = 0 + HEIGHT / 2;
-		e->y1 = j;
-		e->line_color = j;
-		bresenham_line(e);
-	}	
-	for (int j = 0; j < HEIGHT; j++)
-	{
-		e->x0 = WIDTH / 2;
-		e->x1 = 0;
-		e->y0 = HEIGHT / 2;
-		e->y1 = j;
-		e->line_color = j;
-		bresenham_line(e);
-	}
+	// for (int j = 0; j < HEIGHT; j++)
+	// {
+	// 	e->x0 = 0 + WIDTH / 2;
+	// 	e->x1 = WIDTH;
+	// 	e->y0 = 0 + HEIGHT / 2;
+	// 	e->y1 = j;
+	// 	e->line_color = j;
+	// 	bresenham_line(e);
+	// }	
+	// for (int j = 0; j < HEIGHT; j++)
+	// {
+	// 	e->x0 = WIDTH / 2;
+	// 	e->x1 = 0;
+	// 	e->y0 = HEIGHT / 2;
+	// 	e->y1 = j;
+	// 	e->line_color = j;
+	// 	bresenham_line(e);
+	// }
 /* ************************************************************************** */
 	mlx_loop(e->mlx);
 	return (0);
