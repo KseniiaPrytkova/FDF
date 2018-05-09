@@ -168,9 +168,10 @@ int			main(void)
 	mlx_loop(e->mlx);
 	return (0);
 }
-
 ```
 ![alternativetext](go_MinilibX/sample_line_2.png)
+
+Case 2. `deltaX(x1 - x0) < deltaY(y1 - y0)` (y++)
 
 And to see both cases (ft_draw_dx() && ft_draw_dy() are working together; colors are just my imagination):
 
@@ -185,28 +186,6 @@ int			main(void)
 	color = 8388352;
 	e->mlx = mlx_init();
 	e->win = mlx_new_window(e->mlx, WIDTH, HEIGHT, "mlx 42");
-
-/* when dy <= dx */
-	for (int j = 0; j < HEIGHT; j++)
-	{
-		e->x0 = 0 + WIDTH / 2;
-		e->x1 = WIDTH;
-		e->y0 = 0 + HEIGHT / 2;
-		e->y1 = j;
-		e->line_color = j;
-		bresenham_line(e);
-	}	
-	for (int j = 0; j < HEIGHT; j++)
-	{
-		e->x0 = WIDTH / 2;
-		e->x1 = 0;
-		e->y0 = HEIGHT / 2;
-		e->y1 = j;
-		e->line_color = j;
-		bresenham_line(e);
-	}
-
-/* when dy >= dx */
 	for(int j = 0; j < WIDTH; j++)
 	{
 		e->x0 = WIDTH / 2;
@@ -225,11 +204,35 @@ int			main(void)
 		e->line_color = random();
 		bresenham_line(e);
 	}
-
 	mlx_loop(e->mlx);
 	return (0);
 }
-
 ```
-
 ![alternativetext](go_MinilibX/sample_line_3.png)
+
+And just for fun:
+```
+int			main(void)
+{
+	int 	color;
+	t_env 	*e;
+
+	if (!(e = malloc(sizeof(t_env))))
+		return (0);
+	color = 8388352;
+	e->mlx = mlx_init();
+	e->win = mlx_new_window(e->mlx, WIDTH, HEIGHT, "mlx 42");
+	for (int i = 0; i <= 500; i++)
+	{
+		e->x0 = random() % WIDTH - 1;
+ 		e->x1 = random() % WIDTH - 1;
+ 		e->y0 = random() % HEIGHT - 1;
+ 		e->y1 = random() % HEIGHT - 1;
+ 		e->line_color = random();
+ 		bresenham_line(e);
+	}
+	mlx_loop(e->mlx);
+	return (0);
+}
+```
+![alternativetext](go_MinilibX/sample_line_4.png)
