@@ -128,7 +128,7 @@ int			main(void)
 
 ```
 
-Run:
+I am running:
 ```
 gcc -I /Users/kprytkov/FDF/go_MinilibX main.c -L /usr/local/lib -lmlx -framework OpenGL -framework Appkit
 ```
@@ -241,4 +241,3 @@ int			main(void)
 ```
 ![alternativetext](go_MinilibX/sample_line_4.png)
  view code here: [FDF/go_MinilibX/](https://github.com/KseniiaPrytkova/FDF/tree/master/go_MinilibX)
- 
