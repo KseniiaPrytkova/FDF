@@ -173,7 +173,7 @@ int			main(void)
 
 ### Case 2. `deltaX(x1 - x0) < deltaY(y1 - y0)` (y++)
 
-And to see both cases (ft_draw_dx() && ft_draw_dy() are working together; colors are just my imagination):
+See how ft_draw_dy() is working (fn randow() does make decisions about line's color):
 
 ```
 int			main(void)
