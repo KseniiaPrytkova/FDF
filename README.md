@@ -171,7 +171,7 @@ int			main(void)
 ```
 ![alternativetext](go_MinilibX/sample_line_2.png)
 
-Case 2. `deltaX(x1 - x0) < deltaY(y1 - y0)` (y++)
+### Case 2. `deltaX(x1 - x0) < deltaY(y1 - y0)` (y++)
 
 And to see both cases (ft_draw_dx() && ft_draw_dy() are working together; colors are just my imagination):
 
