@@ -122,6 +122,7 @@ int			main(void)
 	e->line_color = 8388352;
 	bresenham_line(e);
 	mlx_loop(e->mlx);
+	free(e);
 	return (0);
 }
 
@@ -166,6 +167,7 @@ int			main(void)
 		bresenham_line(e);
 	}
 	mlx_loop(e->mlx);
+	free(e);
 	return (0);
 }
 ```
@@ -205,6 +207,7 @@ int			main(void)
 		bresenham_line(e);
 	}
 	mlx_loop(e->mlx);
+	free(e);
 	return (0);
 }
 ```
@@ -232,7 +235,10 @@ int			main(void)
  		bresenham_line(e);
 	}
 	mlx_loop(e->mlx);
+	free(e);
 	return (0);
 }
 ```
 ![alternativetext](go_MinilibX/sample_line_4.png)
+ view code here: [FDF/go_MinilibX/](https://github.com/KseniiaPrytkova/FDF/tree/master/go_MinilibX)
+ 

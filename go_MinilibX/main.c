@@ -96,5 +96,6 @@ int			main(void)
 	}
 
 	mlx_loop(e->mlx);
+	free (e);
 	return (0);
 }

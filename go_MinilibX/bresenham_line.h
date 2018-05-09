@@ -19,7 +19,7 @@
 # include <math.h>
 # include <mlx.h>
 
-# define WIDTH 1000
+# define WIDTH 	1000
 # define HEIGHT 600
 
 typedef struct	s_env
@@ -36,6 +36,6 @@ typedef struct	s_env
 	int			y1;
 	int			line_color;
 }				t_env;
-void				bresenham_line(t_env *e);
+void			bresenham_line(t_env *e);
 
 #endif
