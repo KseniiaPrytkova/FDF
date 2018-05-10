@@ -15,6 +15,7 @@
 int		main(int argc, char *argv[])
 {
 	t_env *e;
+	int j;
 
 	if (!(e = (t_env *)malloc(sizeof(t_env))))
 	{
@@ -40,18 +41,44 @@ int		main(int argc, char *argv[])
 
 	e->mlx = mlx_init();
 	e->win = mlx_new_window(e->mlx, WIDTH, HEIGHT, "mlx 42");
-	for (int i = 0; i <= 800; i++)
+	/* ************************************************************************** */
+	int first = 0;
+	int i = 0;
+	int move_x = 40;
+	int move_y = 40; 
+	int scale_x = 40;
+	int scale_y = 40;
+	while (i <  e->l_nb)
 	{
-		e->x0 = random() % WIDTH - 1;
- 		e->x1 = random() % WIDTH - 1;
- 		e->y0 = random() % HEIGHT - 1;
- 		e->y1 = random() % HEIGHT - 1;
- 		e->line_color = random();
- 		// mlx_pixel_put(e->mlx, e->win, e->x0, e->y0, e->line_color);
- 		bresenham_line(e);
+		j = 0;
+		while (j < e->p_nb)
+		{
+			e->line_color = 8388352;
+			e->x0 = move_x + (e->map[i][j].x * scale_x); // p0
+			e->y0 = move_y + (e->map[i][j].y  * scale_y);	// p0
+			if ( j  + 1 < e->p_nb )
+			{
+				e->x1 = move_x + (e->map[i][j + 1].x * scale_x); //p1
+				e->y1 = move_y + (e->map[i][j + 1].y * scale_y); //p1
+				bresenham_line(e);
+			}
+			if ( i + 1 < e->l_nb)
+			{
+				e->x1 = move_x + (e->map[i + 1][j].x * scale_x); //p1(vertical)
+				e->y1 = move_y + (e->map[i + 1][j].y * scale_y); //p1(vertical)
+				bresenham_line(e);
+			}
+			j++;
+		}
+		printf("\n");
+		i++;
 	}
+
+
+	/* ************************************************************************** */
 	mlx_loop(e->mlx);
 
 	// while(1){};
 	return (0);
 }
+

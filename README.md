@@ -99,7 +99,6 @@ void				bresenham_line(t_env *e)
 	else
 		ft_draw_dy(e);
 }
-
 ```
 
 Simple main.c (just to see how the algorithm works when dy <= dx):
@@ -125,7 +124,6 @@ int			main(void)
 	free(e);
 	return (0);
 }
-
 ```
 
 I am running:
