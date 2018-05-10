@@ -8,7 +8,7 @@ A line connects two points. It is a basic element in graphics. To draw a line, y
 ### Case 1. `deltaX(x1 - x0) > deltaY(y1 - y0)` (x++)
 
 Here is the structure, that i use (for your understanding of the variable names):
-``` С
+```С
 # define WIDTH 1000
 # define HEIGHT 600
 
@@ -29,7 +29,7 @@ typedef struct	s_env
 ```
 
 And the implementation of Bresenham's line algorithm (i split the code into several functions for clarity):
-``` С
+```С
 /* if dy <= dx */
 static	void		ft_draw_dx(t_env *e)
 {
@@ -104,7 +104,7 @@ void				bresenham_line(t_env *e)
 
 Simple main.c (just to see how the algorithm works when dy <= dx):
 
-``` С
+```С
 int			main(void)
 {
 	int 	color;
@@ -129,7 +129,7 @@ int			main(void)
 ```
 
 I am running:
-``` Shell
+```Shell
 gcc -I /Users/kprytkov/FDF/go_MinilibX main.c -L /usr/local/lib -lmlx -framework OpenGL -framework Appkit
 ```
 
@@ -137,7 +137,7 @@ gcc -I /Users/kprytkov/FDF/go_MinilibX main.c -L /usr/local/lib -lmlx -framework
 
 Modify your main.c in this way and you will see the entire spectrum of the action of the function `ft_draw_dx()`:
 
-``` С
+```С
 int			main(void)
 {
 	int 	color;
@@ -177,7 +177,7 @@ int			main(void)
 
 See how ft_draw_dy() is working (fn random() does make decisions about line's color):
 
-``` C
+```C
 int			main(void)
 {
 	int 	color;
@@ -214,7 +214,7 @@ int			main(void)
 ![alternativetext](go_MinilibX/sample_line_3.png)
 
 And just for fun:
-``` C
+```C
 int			main(void)
 {
 	int 	color;
