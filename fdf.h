@@ -21,8 +21,8 @@
 # include "libft/libft.h"
 # include "get_next_line.h"
 
-# define WIDTH 1000
-# define HEIGHT 600
+# define WIDTH 1200
+# define HEIGHT 800
 
 typedef struct	s_point
 {
