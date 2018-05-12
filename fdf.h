@@ -23,6 +23,7 @@
 
 # define WIDTH 1200
 # define HEIGHT 800
+# define MARGIN 10 
 
 typedef struct	s_point
 {

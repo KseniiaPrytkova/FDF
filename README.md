@@ -239,3 +239,14 @@ int			main(void)
 ```
 ![alternativetext](go_MinilibX/sample_line_4.png)
  view code here: [FDF/go_MinilibX/](https://github.com/KseniiaPrytkova/FDF/tree/master/go_MinilibX)
+
+#### Links
+* [How To Learn Trigonometry Intuitively](https://betterexplained.com/articles/intuitive-trigonometry/)
+* [Rotation Matrix - Interactive 3D Graphics](https://www.youtube.com/watch?reload=9&v=RqZH-7hlI48&feature=youtu.be)
+* [Interactive 3D Graphics by Autodesk](https://www.udacity.com/course/interactive-3d-graphics--cs291)
+* [3D Rotation](https://www.siggraph.org/education/materials/HyperGraph/modeling/mod_tran/3drota.htm)
+* [Аффинные преобразования пространства](http://compgraphics.info/3D/3d_affine_transformations.php)
+* [Как вращается камера в 3D играх или что такое матрица поворота, Хабрахабр](https://habr.com/post/234203/)
+* [Rotation matrix, Wikipedia](https://en.wikipedia.org/wiki/Rotation_matrix)
+* [Graphic book (rus) (useful rotation formulas on page 27)](https://drive.google.com/file/d/0BwSwmEmxrHCeNzF1STQtME5VZHM/view)
+* [ОСНОВЫ 3D ГРАФИКИ. Матричные преобразования](http://algolist.manual.ru/graphics/3dfaq/articles/23.php)
