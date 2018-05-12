@@ -54,6 +54,12 @@ typedef struct	s_env
 	int			y0;
 	int			y1;
 	int			line_color;
+	int			move_x;
+	int			move_y;
+	int			move_z;
+	int			scale_x;
+	int			scale_y;
+	int			scale_z;
 }				t_env;
 
 int				get_next_line(const int fd, char **line);
@@ -62,5 +68,9 @@ char			**ft_split(char *str);
 void			i_will_read(t_env *e);
 int				ft_atoi_base(char *nb, int base);
 void			bresenham_line(t_env *e);
+
+void 	i_will_init(t_env *e);
+void	i_will_scale(t_env *e);
+void	i_will_move(t_env *e);
 
 #endif

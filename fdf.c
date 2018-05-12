@@ -42,12 +42,12 @@ int		main(int argc, char *argv[])
 	e->mlx = mlx_init();
 	e->win = mlx_new_window(e->mlx, WIDTH, HEIGHT, "mlx 42");
 	/* ************************************************************************** */
-	int first = 0;
+
+	// i_will_init(e);
+	// i_will_scale(e);
+	// i_will_move(e);
+	
 	int i = 0;
-	int move_x = 40;
-	int move_y = 40; 
-	int scale_x = 40;
-	int scale_y = 40;
 	while (i <  e->l_nb)
 	{
 		j = 0;
@@ -58,14 +58,14 @@ int		main(int argc, char *argv[])
 			e->y0 = move_y + (e->map[i][j].y  * scale_y);	// p0
 			if ( j  + 1 < e->p_nb )
 			{
-				e->x1 = move_x + (e->map[i][j + 1].x * scale_x); //p1
-				e->y1 = move_y + (e->map[i][j + 1].y * scale_y); //p1
+				e->x1 = move_x + (e->map[i][j + 1].x * scale_x); 
+				e->y1 = move_y + (e->map[i][j + 1].y * scale_y); 
 				bresenham_line(e);
 			}
 			if ( i + 1 < e->l_nb)
 			{
-				e->x1 = move_x + (e->map[i + 1][j].x * scale_x); //p1(vertical)
-				e->y1 = move_y + (e->map[i + 1][j].y * scale_y); //p1(vertical)
+				e->x1 = move_x + (e->map[i + 1][j].x * scale_x);
+				e->y1 = move_y + (e->map[i + 1][j].y * scale_y); 
 				bresenham_line(e);
 			}
 			j++;
