@@ -43,34 +43,36 @@ int		main(int argc, char *argv[])
 	e->win = mlx_new_window(e->mlx, WIDTH, HEIGHT, "mlx 42");
 	/* ************************************************************************** */
 
-	// i_will_init(e);
+	i_will_init(e);
 	// i_will_scale(e);
 	// i_will_move(e);
-	
+
+	transform(e);
 	int i = 0;
 	while (i <  e->l_nb)
 	{
 		j = 0;
 		while (j < e->p_nb)
 		{
-			e->line_color = 8388352;
-			e->x0 = move_x + (e->map[i][j].x * scale_x); // p0
-			e->y0 = move_y + (e->map[i][j].y  * scale_y);	// p0
-			if ( j  + 1 < e->p_nb )
+			e->line_color = 838835;
+			ARG_FROM_X = e->map[i][j].x;
+			ARG_FROM_Y = e->map[i][j].y;
+			if (j + 1 < e->p_nb)
 			{
-				e->x1 = move_x + (e->map[i][j + 1].x * scale_x); 
-				e->y1 = move_y + (e->map[i][j + 1].y * scale_y); 
+				ARG_TO_X = e->map[i][j + 1].x; 
+				ARG_TO_Y = e->map[i][j + 1].y;
 				bresenham_line(e);
+
+
 			}
-			if ( i + 1 < e->l_nb)
+			if (i + 1 < e->l_nb)
 			{
-				e->x1 = move_x + (e->map[i + 1][j].x * scale_x);
-				e->y1 = move_y + (e->map[i + 1][j].y * scale_y); 
+				ARG_TO_X = e->map[i + 1][j].x; 
+				ARG_TO_Y = e->map[i + 1][j].y;
 				bresenham_line(e);
 			}
 			j++;
 		}
-		printf("\n");
 		i++;
 	}
 

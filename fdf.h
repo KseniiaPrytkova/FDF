@@ -24,6 +24,10 @@
 # define WIDTH 1200
 # define HEIGHT 800
 # define MARGIN 10 
+# define ARG_FROM_X	e->x0
+# define ARG_FROM_Y	e->y0
+# define ARG_TO_X	e->x1
+# define ARG_TO_Y	e->y1
 
 typedef struct	s_point
 {
@@ -70,7 +74,8 @@ int				ft_atoi_base(char *nb, int base);
 void			bresenham_line(t_env *e);
 
 void 	i_will_init(t_env *e);
-void	i_will_scale(t_env *e);
-void	i_will_move(t_env *e);
+void	i_will_scale(t_point *current_point, t_env *e);
+void 	transform(t_env *e);
+int	i_will_move(t_env *e, int i, int j);
 
 #endif
