@@ -250,3 +250,4 @@ int			main(void)
 * [Rotation matrix, Wikipedia](https://en.wikipedia.org/wiki/Rotation_matrix)
 * [Graphic book (rus) (useful rotation formulas on page 27)](https://drive.google.com/file/d/0BwSwmEmxrHCeNzF1STQtME5VZHM/view)
 * [ОСНОВЫ 3D ГРАФИКИ. Матричные преобразования](http://algolist.manual.ru/graphics/3dfaq/articles/23.php)
+* http://www.frolov-lib.ru/books/bsp/v14/ch2_2.htm

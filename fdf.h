@@ -23,7 +23,9 @@
 
 # define WIDTH 1200
 # define HEIGHT 800
-# define MARGIN 10 
+# define MARGIN 100 
+// # define X_WINDOW MARGIN + (1.0 / 2) * (X_Log + 1) * (Width - 2 * MARGIN);
+// # define Y_WINDOW 
 # define ARG_FROM_X	e->x0
 # define ARG_FROM_Y	e->y0
 # define ARG_TO_X	e->x1
@@ -64,6 +66,10 @@ typedef struct	s_env
 	int			scale_x;
 	int			scale_y;
 	int			scale_z;
+	int 		angle_x;
+	int 		angle_y;
+	int 		angle_z;
+
 }				t_env;
 
 int				get_next_line(const int fd, char **line);
@@ -75,7 +81,10 @@ void			bresenham_line(t_env *e);
 
 void 	i_will_init(t_env *e);
 void	i_will_scale(t_point *current_point, t_env *e);
+void	i_will_move(t_point *current_point, t_env *e);
+void	i_will_rotate(t_point *current_point, t_env *e);
+
 void 	transform(t_env *e);
-int	i_will_move(t_env *e, int i, int j);
+
 
 #endif
