@@ -22,8 +22,8 @@
 # include "get_next_line.h"
 
 # define WIDTH 1200
-# define HEIGHT 800
-# define MARGIN 100 
+# define HEIGHT 1200
+# define MARGIN 10 
 // # define X_WINDOW MARGIN + (1.0 / 2) * (X_Log + 1) * (Width - 2 * MARGIN);
 // # define Y_WINDOW 
 # define ARG_FROM_X	e->x0

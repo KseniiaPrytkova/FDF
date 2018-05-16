@@ -43,40 +43,140 @@ int		main(int argc, char *argv[])
 	e->win = mlx_new_window(e->mlx, WIDTH, HEIGHT, "mlx 42");
 	/* ************************************************************************** */
 
-	i_will_init(e);
-	// i_will_scale(e);
-	// i_will_move(e);
+	// i_will_init(e);
 
-	transform(e);
-	int i = 0;
-	while (i <  e->l_nb)
-	{
-		j = 0;
-		while (j < e->p_nb)
-		{
-			e->line_color = 838835;
-			ARG_FROM_X = e->map[i][j].x;
-			ARG_FROM_Y = e->map[i][j].y;
-			if (j + 1 < e->p_nb)
-			{
-				ARG_TO_X = e->map[i][j + 1].x; 
-				ARG_TO_Y = e->map[i][j + 1].y;
-				bresenham_line(e);
+	// transform(e);
+	// int i = 0;
+	// while (i <  e->l_nb)
+	// {
+	// 	j = 0;
+	// 	while (j < e->p_nb)
+	// 	{
+	// 		e->line_color = 838835;
+	// 		ARG_FROM_X = e->map[i][j].x;
+	// 		ARG_FROM_Y = e->map[i][j].y;
+	// 		if (j + 1 < e->p_nb)
+	// 		{
+	// 			ARG_TO_X = e->map[i][j + 1].x; 
+	// 			ARG_TO_Y = e->map[i][j + 1].y;
+	// 			bresenham_line(e);
 
 
-			}
-			if (i + 1 < e->l_nb)
-			{
-				ARG_TO_X = e->map[i + 1][j].x; 
-				ARG_TO_Y = e->map[i + 1][j].y;
-				bresenham_line(e);
-			}
-			j++;
-		}
-		i++;
-	}
+	// 		}
+	// 		if (i + 1 < e->l_nb)
+	// 		{
+	// 			ARG_TO_X = e->map[i + 1][j].x; 
+	// 			ARG_TO_Y = e->map[i + 1][j].y;
+	// 			bresenham_line(e);
+	// 		}
+	// 		j++;
+	// 	}
+	// 	i++;
+	// }
 
 	/* ************************************************************************** */
+	int scale = 5;
+	/* fields */
+	e->line_color = 16777215;
+	ARG_FROM_X = 0 + MARGIN;
+	ARG_FROM_Y = 0 + MARGIN;
+	ARG_TO_X = WIDTH - MARGIN;
+	ARG_TO_Y = HEIGHT - (HEIGHT - MARGIN);
+	bresenham_line(e);
+	ARG_FROM_X = 0 + MARGIN;
+	ARG_FROM_Y = 0 + MARGIN;
+	ARG_TO_X = 0 + MARGIN;
+	ARG_TO_Y = HEIGHT - MARGIN;
+	bresenham_line(e);
+	ARG_FROM_X = 0 + MARGIN;
+	ARG_FROM_Y = HEIGHT - MARGIN;
+	ARG_TO_X = WIDTH - MARGIN;
+	ARG_TO_Y = HEIGHT - MARGIN;
+	bresenham_line(e);
+	ARG_FROM_X = WIDTH - MARGIN;
+	ARG_FROM_Y = HEIGHT - MARGIN;
+	ARG_TO_X = WIDTH - MARGIN;
+	ARG_TO_Y = HEIGHT - (HEIGHT - MARGIN);
+	bresenham_line(e);
+
+	/* cross */
+	e->line_color = 16776960;
+	ARG_FROM_X = 0 + WIDTH / 2;
+	ARG_FROM_Y = 0 + MARGIN;
+	ARG_TO_X = 0 + WIDTH / 2;
+	ARG_TO_Y = HEIGHT - MARGIN;
+	bresenham_line(e);
+	ARG_FROM_X = 0 + MARGIN;
+	ARG_FROM_Y = 0 + HEIGHT / 2;
+	ARG_TO_X = WIDTH - MARGIN;
+	ARG_TO_Y = 0 + HEIGHT / 2;
+	bresenham_line(e);
+
+
+	/* triangle */
+	int cx1, cx2, cx3;
+	int cy1, cy2, cy3;
+
+	e->line_color = 838835;
+ 	ARG_FROM_X = (0 * scale) + (WIDTH / 2 - scale);
+ 	printf("x0: %d\n", ARG_FROM_X);
+	ARG_FROM_Y = (30 * scale) + (HEIGHT / 2 - scale);
+	printf("y0: %d\n", ARG_FROM_Y);
+	ARG_TO_X = (20 * scale) + (WIDTH / 2 - scale);
+	printf("x1: %d\n", ARG_TO_X);
+	ARG_TO_Y = (10 * scale) + (HEIGHT / 2 - scale);
+	printf("y1: %d\n", ARG_TO_Y);
+	// cx1 = (ARG_FROM_X + ARG_TO_X) / 2;
+	// cy1 = (ARG_FROM_Y + ARG_TO_Y) / 2;
+	bresenham_line(e);
+	printf("---\n");
+	ARG_FROM_X = (20 * scale) + (WIDTH / 2 - scale);
+	printf("x0: %d\n", ARG_FROM_X);
+	ARG_FROM_Y = (10 * scale) + (HEIGHT / 2 - scale);
+	printf("y0: %d\n", ARG_FROM_Y);
+	ARG_TO_X = (40 * scale) + (WIDTH / 2 - scale);
+	printf("x1: %d\n", ARG_TO_X);
+	ARG_TO_Y = (30 * scale) + (HEIGHT / 2 - scale);
+	printf("y1: %d\n", ARG_TO_Y);
+	// cx2 = (ARG_FROM_X + ARG_TO_X) / 2;
+	// cy2 = (ARG_FROM_Y + ARG_TO_Y) / 2;
+	bresenham_line(e);
+	printf("---\n");
+	ARG_FROM_X = (40 * scale) + (WIDTH / 2 - scale);
+	printf("x0: %d\n", ARG_FROM_X);
+	ARG_FROM_Y = (30 * scale) + (HEIGHT / 2 - scale);
+	printf("y0: %d\n", ARG_FROM_Y);
+	ARG_TO_X = (0 * scale) + (WIDTH / 2 - scale);
+	printf("x1: %d\n", ARG_TO_X);
+	ARG_TO_Y = (30 * scale) + (HEIGHT / 2 - scale);
+	printf("y1: %d\n", ARG_TO_Y);
+	// cx3 = (ARG_FROM_X + ARG_TO_X) / 2;
+	// cy3 = (ARG_FROM_Y + ARG_TO_Y) / 2;
+	bresenham_line(e);
+
+	/* --- */
+	// e->line_color = 16776960;
+	// ARG_FROM_X = (0 * scale) + (WIDTH / 2 - scale);
+	// ARG_FROM_Y = (30 * scale) + (HEIGHT / 2 - scale);
+	// ARG_TO_X = cx2;
+	// ARG_TO_Y = cy2;
+	// bresenham_line(e);
+	// ARG_FROM_X = (20 * scale) + (WIDTH / 2 - scale);
+	// ARG_FROM_Y = (10 * scale) + (HEIGHT / 2 - scale);
+	// ARG_TO_X = cx3;
+	// ARG_TO_Y = cy3;
+	// bresenham_line(e);
+	// ARG_FROM_X = (40 * scale) + (WIDTH / 2 - scale);
+	// ARG_FROM_Y = (30 * scale) + (HEIGHT / 2 - scale);
+	// ARG_TO_X = cx1;
+	// ARG_TO_Y = cy1;
+	// bresenham_line(e);
+	/* --- */
+
+
+
+
+
 	mlx_loop(e->mlx);
 
 	// while(1){};

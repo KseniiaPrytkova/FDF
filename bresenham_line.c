@@ -20,7 +20,7 @@ static	void		ft_draw_dx(t_env *e)
 			error += (e->dy - e->dx) << 1; 
 		}
 		else
-			error += e->dy << 1; // 
+			error += e->dy << 1;
 		mlx_pixel_put(e->mlx, e->win, x, y, e->line_color);
 		x += e->step_x;
 		i++;
