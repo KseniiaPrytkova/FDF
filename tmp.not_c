@@ -1,0 +1,188 @@
+	/* ************************************************************************** */
+
+	// i_will_init(e);
+
+	// transform(e);
+	// int i = 0;
+	// while (i <  e->l_nb)
+	// {
+	// 	j = 0;
+	// 	while (j < e->p_nb)
+	// 	{
+	// 		e->line_color = 838835;
+	// 		ARG_FROM_X = e->map[i][j].x;
+	// 		ARG_FROM_Y = e->map[i][j].y;
+	// 		if (j + 1 < e->p_nb)
+	// 		{
+	// 			ARG_TO_X = e->map[i][j + 1].x; 
+	// 			ARG_TO_Y = e->map[i][j + 1].y;
+	// 			bresenham_line(e);
+
+
+	// 		}
+	// 		if (i + 1 < e->l_nb)
+	// 		{
+	// 			ARG_TO_X = e->map[i + 1][j].x; 
+	// 			ARG_TO_Y = e->map[i + 1][j].y;
+	// 			bresenham_line(e);
+	// 		}
+	// 		j++;
+	// 	}
+	// 	i++;
+	// }
+
+	/* ************************************************************************** */
+	int scale = 5;
+	int offsetx , offsety;
+	int lenght;
+
+
+	/* fields */
+	e->line_color = 16777215;
+	ARG_FROM_X = 0 + MARGIN;
+	ARG_FROM_Y = 0 + MARGIN;
+	ARG_TO_X = WIDTH - MARGIN;
+	ARG_TO_Y = HEIGHT - (HEIGHT - MARGIN);
+	bresenham_line(e);
+	ARG_FROM_X = 0 + MARGIN;
+	ARG_FROM_Y = 0 + MARGIN;
+	ARG_TO_X = 0 + MARGIN;
+	ARG_TO_Y = HEIGHT - MARGIN;
+	bresenham_line(e);
+	ARG_FROM_X = 0 + MARGIN;
+	ARG_FROM_Y = HEIGHT - MARGIN;
+	ARG_TO_X = WIDTH - MARGIN;
+	ARG_TO_Y = HEIGHT - MARGIN;
+	bresenham_line(e);
+	ARG_FROM_X = WIDTH - MARGIN;
+	ARG_FROM_Y = HEIGHT - MARGIN;
+	ARG_TO_X = WIDTH - MARGIN;
+	ARG_TO_Y = HEIGHT - (HEIGHT - MARGIN);
+	bresenham_line(e);
+
+	/* cross */
+	e->line_color = 16776960;
+	ARG_FROM_X = 0 + WIDTH / 2;
+	ARG_FROM_Y = 0 + MARGIN;
+	ARG_TO_X = 0 + WIDTH / 2;
+	ARG_TO_Y = HEIGHT - MARGIN;
+	bresenham_line(e);
+	ARG_FROM_X = 0 + MARGIN;
+	ARG_FROM_Y = 0 + HEIGHT / 2;
+	ARG_TO_X = WIDTH - MARGIN;
+	ARG_TO_Y = 0 + HEIGHT / 2;
+	bresenham_line(e);
+
+
+	/* triangle */
+	int cx1, cx2, cx3;
+	int cy1, cy2, cy3;
+
+	int tmpx, tmpy, tmpx1, tmpy1;
+	float radian;
+	radian = 0 * PI / 180; 
+	offsetx = WIDTH / 2;
+	offsety = HEIGHT / 2;
+
+	e->line_color = 838835;
+ 	ARG_FROM_X = (0) + (WIDTH / 2 - 50);
+	ARG_FROM_Y = (0) + (HEIGHT / 2 - 50);
+	ARG_TO_X = (100) + (WIDTH / 2 - 50);
+	ARG_TO_Y = (100) + (HEIGHT / 2 - 50);
+
+
+	//
+	ARG_FROM_X -= (WIDTH / 2 + 50);
+	ARG_FROM_Y -= (HEIGHT /2 + 50);
+	ARG_TO_X -= (WIDTH / 2 + 50);
+	ARG_TO_Y -= (HEIGHT / 2 + 50);
+
+
+	///ROT
+
+	tmpx = ARG_FROM_X;
+	tmpy = ARG_FROM_Y;
+	tmpx1 = ARG_TO_X;
+	tmpy1 = ARG_TO_Y;
+
+	ARG_FROM_X = tmpx * cos(radian) - tmpy * sin(radian);
+	ARG_FROM_Y = tmpx * sin(radian) + tmpy * cos(radian);
+
+	ARG_TO_X = tmpx1 * cos(radian) - tmpy1 * sin(radian);
+	ARG_TO_Y = tmpx1 * sin(radian) + tmpy1 * cos(radian);
+	///
+
+
+
+
+	ARG_FROM_X += WIDTH / 2 + 50;
+	ARG_FROM_Y += HEIGHT /2 + 50;
+	ARG_TO_X += WIDTH / 2 + 50;
+	ARG_TO_Y += HEIGHT / 2 + 50;
+
+	//
+
+
+
+	printf("AAAAAA::::! %f \n" , radian);
+
+	// cx1 = (ARG_FROM_X + ARG_TO_X) / 2;
+	// cy1 = (ARG_FROM_Y + ARG_TO_Y) / 2;
+	bresenham_line(e);
+	// e->line_color = 838835;
+ // 	ARG_FROM_X = (0 * scale) + (WIDTH / 2 - scale);
+ // 	printf("x0: %d\n", ARG_FROM_X);
+	// ARG_FROM_Y = (30 * scale) + (HEIGHT / 2 - scale);
+	// printf("y0: %d\n", ARG_FROM_Y);
+	// ARG_TO_X = (20 * scale) + (WIDTH / 2 - scale);
+	// printf("x1: %d\n", ARG_TO_X);
+	// ARG_TO_Y = (10 * scale) + (HEIGHT / 2 - scale);
+	// printf("y1: %d\n", ARG_TO_Y);
+	// // cx1 = (ARG_FROM_X + ARG_TO_X) / 2;
+	// // cy1 = (ARG_FROM_Y + ARG_TO_Y) / 2;
+	// bresenham_line(e);
+	// printf("---\n");
+	// ARG_FROM_X = (20 * scale) + (WIDTH / 2 - scale);
+	// printf("x0: %d\n", ARG_FROM_X);
+	// ARG_FROM_Y = (10 * scale) + (HEIGHT / 2 - scale);
+	// printf("y0: %d\n", ARG_FROM_Y);
+	// ARG_TO_X = (40 * scale) + (WIDTH / 2 - scale);
+	// printf("x1: %d\n", ARG_TO_X);
+	// ARG_TO_Y = (30 * scale) + (HEIGHT / 2 - scale);
+	// printf("y1: %d\n", ARG_TO_Y);
+	// // cx2 = (ARG_FROM_X + ARG_TO_X) / 2;
+	// // cy2 = (ARG_FROM_Y + ARG_TO_Y) / 2;
+	// bresenham_line(e);
+	// printf("---\n");
+	// ARG_FROM_X = (40 * scale) + (WIDTH / 2 - scale);
+	// printf("x0: %d\n", ARG_FROM_X);
+	// ARG_FROM_Y = (30 * scale) + (HEIGHT / 2 - scale);
+	// printf("y0: %d\n", ARG_FROM_Y);
+	// ARG_TO_X = (0 * scale) + (WIDTH / 2 - scale);
+	// printf("x1: %d\n", ARG_TO_X);
+	// ARG_TO_Y = (30 * scale) + (HEIGHT / 2 - scale);
+	// printf("y1: %d\n", ARG_TO_Y);
+	// // cx3 = (ARG_FROM_X + ARG_TO_X) / 2;
+	// // cy3 = (ARG_FROM_Y + ARG_TO_Y) / 2;
+	// bresenham_line(e);
+
+	/* --- */
+	// e->line_color = 16776960;
+	// ARG_FROM_X = (0 * scale) + (WIDTH / 2 - scale);
+	// ARG_FROM_Y = (30 * scale) + (HEIGHT / 2 - scale);
+	// ARG_TO_X = cx2;
+	// ARG_TO_Y = cy2;
+	// bresenham_line(e);
+	// ARG_FROM_X = (20 * scale) + (WIDTH / 2 - scale);
+	// ARG_FROM_Y = (10 * scale) + (HEIGHT / 2 - scale);
+	// ARG_TO_X = cx3;
+	// ARG_TO_Y = cy3;
+	// bresenham_line(e);
+	// ARG_FROM_X = (40 * scale) + (WIDTH / 2 - scale);
+	// ARG_FROM_Y = (30 * scale) + (HEIGHT / 2 - scale);
+	// ARG_TO_X = cx1;
+	// ARG_TO_Y = cy1;
+	// bresenham_line(e);
+	/* --- */
+
+

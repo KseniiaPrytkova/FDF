@@ -65,6 +65,9 @@ void	i_will_move(t_point *current_point, t_env *e)
 
 void	i_will_rotate(t_point *current_point, t_env *e)
 {
+	// e->angle = 180 * PI / ?????????
+	/// 
+	///
 	/* rotate_x*/
 	current_point->x = (current_point->x + (e->p_nb / 2));
 	current_point->y = ( (current_point->y + (e->l_nb / 2))  * cos(e->angle_x)) + current_point->z * sin(e->angle_x);

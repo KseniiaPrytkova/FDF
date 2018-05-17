@@ -24,6 +24,7 @@
 # define WIDTH 1200
 # define HEIGHT 1200
 # define MARGIN 10 
+# define PI 3.14159265359
 // # define X_WINDOW MARGIN + (1.0 / 2) * (X_Log + 1) * (Width - 2 * MARGIN);
 // # define Y_WINDOW 
 # define ARG_FROM_X	e->x0
@@ -69,6 +70,7 @@ typedef struct	s_env
 	int 		angle_x;
 	int 		angle_y;
 	int 		angle_z;
+	int			tmp_angle;
 
 }				t_env;
 

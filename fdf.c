@@ -12,6 +12,94 @@
 
 #include "fdf.h"
 
+int	key_exit(int keycode)
+{
+	if (keycode == 53)
+	{
+		exit(1);
+	}
+	return (-1);
+}
+
+void translate_all(t_env *e, int move_x, int move_y)
+{
+	ARG_FROM_X += move_x;
+	ARG_FROM_Y += move_y;
+	ARG_TO_X += move_x;
+	ARG_TO_Y += move_y;
+}
+
+void rotate_z(t_env *e, int angle)
+{
+	float radian = angle * PI / 180;
+	int x0, x1, y0, y1;
+
+	x0 = ARG_FROM_X;
+	y0 = ARG_FROM_Y;
+	x1 = ARG_TO_X;
+	y1 = ARG_TO_Y;
+	ARG_FROM_X = x0 * cos(radian) - y0 * sin(radian);
+	ARG_FROM_Y = x0 * sin(radian) + y0 * cos(radian);
+
+	ARG_TO_X = x1 * cos(radian) - y1 * sin(radian);
+	ARG_TO_Y = x1 * sin(radian) + y1 * cos(radian);
+}
+
+void	line_fill_param(t_env *e, int x0, int y0, int x1, int y1)
+{
+	e->line_color = 0xFFFFFF;
+	ARG_FROM_X = x0;
+	ARG_FROM_Y = y0;
+	ARG_TO_X = x1;
+	ARG_TO_Y = y1;
+}
+
+void	draw_line_and_rotate(t_env *e)
+{
+	int length_x = 100;
+	int length_y = 100;
+	int center_x = length_x /2;
+	int center_y = length_y /2;
+	line_fill_param(e, 0, 0, length_x, length_y);
+
+
+	//translate_all(e, -center_x, -center_y);
+	//translate_all(e, 300, 300);
+	rotate_z(e, e->tmp_angle);
+	//translate_all(e, +center_x, +center_y);
+
+
+
+	//FINAL DRAW
+	translate_all(e, WIDTH/2, HEIGHT/2);
+	bresenham_line(e);
+}
+
+int key_draw(int keycode, t_env *e)
+{
+	mlx_clear_window(e->mlx, e->win);
+	if (keycode == 123)
+	{
+		e->tmp_angle -= 50;
+	}
+	if (keycode == 124)
+	{
+		e->tmp_angle += 50;
+	}
+	draw_line_and_rotate(e);
+	return (1);
+}
+
+int loop_draw(t_env *e)
+{
+	mlx_clear_window(e->mlx, e->win);
+
+	e->tmp_angle += 1; //SPEEED!
+	printf("%d\n", e->tmp_angle);
+	draw_line_and_rotate(e);
+	return (1);
+}
+
 int		main(int argc, char *argv[])
 {
 	t_env *e;
@@ -41,145 +129,15 @@ int		main(int argc, char *argv[])
 
 	e->mlx = mlx_init();
 	e->win = mlx_new_window(e->mlx, WIDTH, HEIGHT, "mlx 42");
-	/* ************************************************************************** */
-
-	// i_will_init(e);
-
-	// transform(e);
-	// int i = 0;
-	// while (i <  e->l_nb)
-	// {
-	// 	j = 0;
-	// 	while (j < e->p_nb)
-	// 	{
-	// 		e->line_color = 838835;
-	// 		ARG_FROM_X = e->map[i][j].x;
-	// 		ARG_FROM_Y = e->map[i][j].y;
-	// 		if (j + 1 < e->p_nb)
-	// 		{
-	// 			ARG_TO_X = e->map[i][j + 1].x; 
-	// 			ARG_TO_Y = e->map[i][j + 1].y;
-	// 			bresenham_line(e);
 
 
-	// 		}
-	// 		if (i + 1 < e->l_nb)
-	// 		{
-	// 			ARG_TO_X = e->map[i + 1][j].x; 
-	// 			ARG_TO_Y = e->map[i + 1][j].y;
-	// 			bresenham_line(e);
-	// 		}
-	// 		j++;
-	// 	}
-	// 	i++;
-	// }
+	draw_line_and_rotate(e);
 
-	/* ************************************************************************** */
-	int scale = 5;
-	/* fields */
-	e->line_color = 16777215;
-	ARG_FROM_X = 0 + MARGIN;
-	ARG_FROM_Y = 0 + MARGIN;
-	ARG_TO_X = WIDTH - MARGIN;
-	ARG_TO_Y = HEIGHT - (HEIGHT - MARGIN);
-	bresenham_line(e);
-	ARG_FROM_X = 0 + MARGIN;
-	ARG_FROM_Y = 0 + MARGIN;
-	ARG_TO_X = 0 + MARGIN;
-	ARG_TO_Y = HEIGHT - MARGIN;
-	bresenham_line(e);
-	ARG_FROM_X = 0 + MARGIN;
-	ARG_FROM_Y = HEIGHT - MARGIN;
-	ARG_TO_X = WIDTH - MARGIN;
-	ARG_TO_Y = HEIGHT - MARGIN;
-	bresenham_line(e);
-	ARG_FROM_X = WIDTH - MARGIN;
-	ARG_FROM_Y = HEIGHT - MARGIN;
-	ARG_TO_X = WIDTH - MARGIN;
-	ARG_TO_Y = HEIGHT - (HEIGHT - MARGIN);
-	bresenham_line(e);
-
-	/* cross */
-	e->line_color = 16776960;
-	ARG_FROM_X = 0 + WIDTH / 2;
-	ARG_FROM_Y = 0 + MARGIN;
-	ARG_TO_X = 0 + WIDTH / 2;
-	ARG_TO_Y = HEIGHT - MARGIN;
-	bresenham_line(e);
-	ARG_FROM_X = 0 + MARGIN;
-	ARG_FROM_Y = 0 + HEIGHT / 2;
-	ARG_TO_X = WIDTH - MARGIN;
-	ARG_TO_Y = 0 + HEIGHT / 2;
-	bresenham_line(e);
-
-
-	/* triangle */
-	int cx1, cx2, cx3;
-	int cy1, cy2, cy3;
-
-	e->line_color = 838835;
- 	ARG_FROM_X = (0 * scale) + (WIDTH / 2 - scale);
- 	printf("x0: %d\n", ARG_FROM_X);
-	ARG_FROM_Y = (30 * scale) + (HEIGHT / 2 - scale);
-	printf("y0: %d\n", ARG_FROM_Y);
-	ARG_TO_X = (20 * scale) + (WIDTH / 2 - scale);
-	printf("x1: %d\n", ARG_TO_X);
-	ARG_TO_Y = (10 * scale) + (HEIGHT / 2 - scale);
-	printf("y1: %d\n", ARG_TO_Y);
-	// cx1 = (ARG_FROM_X + ARG_TO_X) / 2;
-	// cy1 = (ARG_FROM_Y + ARG_TO_Y) / 2;
-	bresenham_line(e);
-	printf("---\n");
-	ARG_FROM_X = (20 * scale) + (WIDTH / 2 - scale);
-	printf("x0: %d\n", ARG_FROM_X);
-	ARG_FROM_Y = (10 * scale) + (HEIGHT / 2 - scale);
-	printf("y0: %d\n", ARG_FROM_Y);
-	ARG_TO_X = (40 * scale) + (WIDTH / 2 - scale);
-	printf("x1: %d\n", ARG_TO_X);
-	ARG_TO_Y = (30 * scale) + (HEIGHT / 2 - scale);
-	printf("y1: %d\n", ARG_TO_Y);
-	// cx2 = (ARG_FROM_X + ARG_TO_X) / 2;
-	// cy2 = (ARG_FROM_Y + ARG_TO_Y) / 2;
-	bresenham_line(e);
-	printf("---\n");
-	ARG_FROM_X = (40 * scale) + (WIDTH / 2 - scale);
-	printf("x0: %d\n", ARG_FROM_X);
-	ARG_FROM_Y = (30 * scale) + (HEIGHT / 2 - scale);
-	printf("y0: %d\n", ARG_FROM_Y);
-	ARG_TO_X = (0 * scale) + (WIDTH / 2 - scale);
-	printf("x1: %d\n", ARG_TO_X);
-	ARG_TO_Y = (30 * scale) + (HEIGHT / 2 - scale);
-	printf("y1: %d\n", ARG_TO_Y);
-	// cx3 = (ARG_FROM_X + ARG_TO_X) / 2;
-	// cy3 = (ARG_FROM_Y + ARG_TO_Y) / 2;
-	bresenham_line(e);
-
-	/* --- */
-	// e->line_color = 16776960;
-	// ARG_FROM_X = (0 * scale) + (WIDTH / 2 - scale);
-	// ARG_FROM_Y = (30 * scale) + (HEIGHT / 2 - scale);
-	// ARG_TO_X = cx2;
-	// ARG_TO_Y = cy2;
-	// bresenham_line(e);
-	// ARG_FROM_X = (20 * scale) + (WIDTH / 2 - scale);
-	// ARG_FROM_Y = (10 * scale) + (HEIGHT / 2 - scale);
-	// ARG_TO_X = cx3;
-	// ARG_TO_Y = cy3;
-	// bresenham_line(e);
-	// ARG_FROM_X = (40 * scale) + (WIDTH / 2 - scale);
-	// ARG_FROM_Y = (30 * scale) + (HEIGHT / 2 - scale);
-	// ARG_TO_X = cx1;
-	// ARG_TO_Y = cy1;
-	// bresenham_line(e);
-	/* --- */
-
-
-
-
-
+	e->tmp_angle = 0;
+	mlx_key_hook(e->win, key_exit, e);
+	mlx_key_hook(e->win, key_draw, e);
+	mlx_loop_hook(e->mlx, loop_draw, e);
 	mlx_loop(e->mlx);
-
-	// while(1){};
 	return (0);
 }
 
