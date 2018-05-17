@@ -71,6 +71,7 @@ typedef struct	s_env
 	int 		angle_y;
 	int 		angle_z;
 	int			tmp_angle;
+	t_point		*points;
 
 }				t_env;
 

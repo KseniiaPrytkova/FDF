@@ -21,58 +21,151 @@ int	key_exit(int keycode)
 	return (-1);
 }
 
-void translate_all(t_env *e, int move_x, int move_y)
-{
-	ARG_FROM_X += move_x;
-	ARG_FROM_Y += move_y;
-	ARG_TO_X += move_x;
-	ARG_TO_Y += move_y;
-}
-
-void rotate_z(t_env *e, int angle)
-{
-	float radian = angle * PI / 180;
-	int x0, x1, y0, y1;
-
-	x0 = ARG_FROM_X;
-	y0 = ARG_FROM_Y;
-	x1 = ARG_TO_X;
-	y1 = ARG_TO_Y;
-	ARG_FROM_X = x0 * cos(radian) - y0 * sin(radian);
-	ARG_FROM_Y = x0 * sin(radian) + y0 * cos(radian);
-
-	ARG_TO_X = x1 * cos(radian) - y1 * sin(radian);
-	ARG_TO_Y = x1 * sin(radian) + y1 * cos(radian);
-}
-
 void	line_fill_param(t_env *e, int x0, int y0, int x1, int y1)
 {
-	e->line_color = 0xFFFFFF;
 	ARG_FROM_X = x0;
 	ARG_FROM_Y = y0;
 	ARG_TO_X = x1;
 	ARG_TO_Y = y1;
 }
 
+t_point	fill_point(int x, int y, int z)
+{
+	t_point ret;
+	ret.x = x;
+	ret.y = y;
+	ret.z = z;
+
+	return (ret);
+}
+
+// void translate_all(t_env *e, int move_x, int move_y)
+// {
+// 	ARG_FROM_X += move_x;
+// 	ARG_FROM_Y += move_y;
+// 	ARG_TO_X += move_x;
+// 	ARG_TO_Y += move_y;
+// }
+
+// void rotate_z(t_env *e, int angle)
+// {
+// 	float radian = angle * PI / 180;
+// 	int x0, x1, y0, y1;
+
+// 	x0 = ARG_FROM_X;
+// 	y0 = ARG_FROM_Y;
+// 	x1 = ARG_TO_X;
+// 	y1 = ARG_TO_Y;
+// 	ARG_FROM_X = x0 * cos(radian) - y0 * sin(radian);
+// 	ARG_FROM_Y = x0 * sin(radian) + y0 * cos(radian);
+
+// 	ARG_TO_X = x1 * cos(radian) - y1 * sin(radian);
+// 	ARG_TO_Y = x1 * sin(radian) + y1 * cos(radian);
+// }
+
+
+void	rotate_x(t_env *e, int angle)
+{
+		float radian = angle * PI / 180;
+		int i = 0;
+
+		int tmp_y;
+
+		while (i < 4)
+		{
+			tmp_y = e->points[i].y;
+
+			e->points[i].y = e->points[i].y * cos(radian) - e->points[i].z * sin(radian);
+			e->points[i].z = tmp_y * sin(radian) + e->points[i].z * cos(radian);
+			i++;
+		}
+}
+
+void	rotate_y(t_env *e, int angle)
+{
+		float radian = angle * PI / 180;
+
+		int i = 0;
+
+		int tmp_z;
+
+		while (i < 4)
+		{
+			tmp_z = e->points[i].z;
+
+			e->points[i].z = e->points[i].z * cos(radian) - e->points[i].x * sin(radian);
+			e->points[i].x = tmp_z * sin(radian) + e->points[i].x * cos(radian);
+			i++;
+		}
+}
+
+void	rotate_z(t_env *e, int angle)
+{
+		float radian = angle * PI / 180;
+		int i = 0;
+		int tmp_x;
+
+		while (i < 4)
+		{
+			tmp_x = e->points[i].x;
+
+			e->points[i].x = e->points[i].x * cos(radian) - e->points[i].y * sin(radian);
+			e->points[i].y = tmp_x * sin(radian) + e->points[i].y * cos(radian);
+			i++;
+		}
+}
+
+
+void	move_all(t_env *e, int move_x, int move_y)
+{
+	int i = 0;
+
+	while (i < 4)
+	{
+		e->points[i].x += move_x;
+		e->points[i].y += move_y;
+		i++;
+	}
+}
+
+void	draw_triangle(t_env *e, int size, int start)
+{
+	int 	end;
+
+	end 	= start + size;
+
+	e->points[0] = fill_point(start, start, start);
+	e->points[1] = fill_point(end, start , start);
+	e->points[2] = fill_point(start, end, start);
+	e->points[3] = fill_point(start, start, end);
+
+	rotate_z(e, e->tmp_angle);
+	rotate_x(e, e->tmp_angle);
+	rotate_y(e, e->tmp_angle);
+
+	move_all(e, WIDTH/2, HEIGHT/2); //move to the center for a nice view!!! ^^
+	line_fill_param(e, e->points[0].x, e->points[0].y, e->points[1].x, e->points[1].y);
+	bresenham_line(e);
+	line_fill_param(e, e->points[1].x, e->points[1].y, e->points[2].x, e->points[2].y);
+	bresenham_line(e);
+	line_fill_param(e, e->points[2].x, e->points[2].y, e->points[0].x, e->points[0].y);
+	bresenham_line(e);
+
+	line_fill_param(e, e->points[0].x, e->points[0].y, e->points[3].x, e->points[3].y);
+	bresenham_line(e);
+	line_fill_param(e, e->points[1].x, e->points[1].y, e->points[3].x, e->points[3].y);
+	bresenham_line(e);
+	line_fill_param(e, e->points[2].x, e->points[2].y, e->points[3].x, e->points[3].y);
+	bresenham_line(e);
+}
+
 void	draw_line_and_rotate(t_env *e)
 {
-	int length_x = 100;
-	int length_y = 100;
-	int center_x = length_x /2;
-	int center_y = length_y /2;
-	line_fill_param(e, 0, 0, length_x, length_y);
+	e->points = malloc(sizeof(t_point) * 4);
+	//move_all(e, -center_x, -center_y);
 
-
-	//translate_all(e, -center_x, -center_y);
-	//translate_all(e, 300, 300);
-	rotate_z(e, e->tmp_angle);
-	//translate_all(e, +center_x, +center_y);
-
-
-
-	//FINAL DRAW
-	translate_all(e, WIDTH/2, HEIGHT/2);
-	bresenham_line(e);
+	draw_triangle(e, 100, 0);
+	draw_triangle(e, 300, 0);
 }
 
 int key_draw(int keycode, t_env *e)
@@ -95,7 +188,7 @@ int loop_draw(t_env *e)
 	mlx_clear_window(e->mlx, e->win);
 
 	e->tmp_angle += 1; //SPEEED!
-	printf("%d\n", e->tmp_angle);
+	e->line_color = random() % 16581375;
 	draw_line_and_rotate(e);
 	return (1);
 }
@@ -134,8 +227,8 @@ int		main(int argc, char *argv[])
 	draw_line_and_rotate(e);
 
 	e->tmp_angle = 0;
-	mlx_key_hook(e->win, key_exit, e);
 	mlx_key_hook(e->win, key_draw, e);
+	mlx_key_hook(e->win, key_exit, e);
 	mlx_loop_hook(e->mlx, loop_draw, e);
 	mlx_loop(e->mlx);
 	return (0);
