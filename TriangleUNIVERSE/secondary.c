@@ -13,7 +13,6 @@
 #include "triangle.h"
 
 /*variants of the final representation of the figure*/
-
 int key_draw(int keycode, t_env *e)
 {
 	mlx_clear_window(e->mlx, e->win);
