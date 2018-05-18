@@ -63,7 +63,7 @@ void		draw_triangle(t_env *e, int size, int start)
 	rotate_x(e, e->tmp_angle);
 	rotate_y(e, e->tmp_angle);
 
-	move_all(e, WIDTH/2, HEIGHT/2); //move to the center for a nice view!!! ^^
+	move_all(e, WIDTH/2, HEIGHT/2); /* move to the center for a nice view!!! ^^ */
 	line_fill_param(e, e->points[0].x, e->points[0].y, e->points[1].x, e->points[1].y);
 	bresenham_line(e);
 	line_fill_param(e, e->points[1].x, e->points[1].y, e->points[2].x, e->points[2].y);
@@ -88,7 +88,7 @@ int		main(void)
 	e->tmp_angle = 0;
 	draw_line_and_rotate(e);
 	mlx_hook(e->win, 2, 5, key_draw, e);
-	//mlx_loop_hook(e->mlx, loop_draw, e);
+	/*mlx_loop_hook(e->mlx, loop_draw, e);*/
 	mlx_loop(e->mlx);
 	return (0);
 }

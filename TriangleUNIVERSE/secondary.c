@@ -36,7 +36,7 @@ int key_draw(int keycode, t_env *e)
 int loop_draw(t_env *e)
 {
 	mlx_clear_window(e->mlx, e->win);
-	e->tmp_angle += 1; //SPEEED!
+	e->tmp_angle += 1; /*SPEEED!*/
 	e->line_color = random() % 16581375;
 	draw_line_and_rotate(e);
 	return (1);
