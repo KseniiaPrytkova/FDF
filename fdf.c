@@ -12,185 +12,74 @@
 
 #include "fdf.h"
 
-int	key_exit(int keycode)
+
+void	matrix_reset(t_env *e)
 {
-	if (keycode == 53)
+	int i;
+	int	j;
+
+	i = 0;
+	while (i <  e->l_nb)
 	{
-		exit(1);
-	}
-	return (-1);
-}
-
-void	line_fill_param(t_env *e, int x0, int y0, int x1, int y1)
-{
-	ARG_FROM_X = x0;
-	ARG_FROM_Y = y0;
-	ARG_TO_X = x1;
-	ARG_TO_Y = y1;
-}
-
-t_point	fill_point(int x, int y, int z)
-{
-	t_point ret;
-	ret.x = x;
-	ret.y = y;
-	ret.z = z;
-
-	return (ret);
-}
-
-// void translate_all(t_env *e, int move_x, int move_y)
-// {
-// 	ARG_FROM_X += move_x;
-// 	ARG_FROM_Y += move_y;
-// 	ARG_TO_X += move_x;
-// 	ARG_TO_Y += move_y;
-// }
-
-// void rotate_z(t_env *e, int angle)
-// {
-// 	float radian = angle * PI / 180;
-// 	int x0, x1, y0, y1;
-
-// 	x0 = ARG_FROM_X;
-// 	y0 = ARG_FROM_Y;
-// 	x1 = ARG_TO_X;
-// 	y1 = ARG_TO_Y;
-// 	ARG_FROM_X = x0 * cos(radian) - y0 * sin(radian);
-// 	ARG_FROM_Y = x0 * sin(radian) + y0 * cos(radian);
-
-// 	ARG_TO_X = x1 * cos(radian) - y1 * sin(radian);
-// 	ARG_TO_Y = x1 * sin(radian) + y1 * cos(radian);
-// }
-
-
-void	rotate_x(t_env *e, int angle)
-{
-		float radian = angle * PI / 180;
-		int i = 0;
-
-		int tmp_y;
-
-		while (i < 4)
+		j = 0;
+		while (j < e->p_nb)
 		{
-			tmp_y = e->points[i].y;
-
-			e->points[i].y = e->points[i].y * cos(radian) - e->points[i].z * sin(radian);
-			e->points[i].z = tmp_y * sin(radian) + e->points[i].z * cos(radian);
-			i++;
+			e->map[i][j].x = e->map[i][j].x_before;
+			e->map[i][j].y = e->map[i][j].y_before;
+			e->map[i][j].z = e->map[i][j].z_before;
+			j++;
 		}
-}
-
-void	rotate_y(t_env *e, int angle)
-{
-		float radian = angle * PI / 180;
-
-		int i = 0;
-
-		int tmp_z;
-
-		while (i < 4)
-		{
-			tmp_z = e->points[i].z;
-
-			e->points[i].z = e->points[i].z * cos(radian) - e->points[i].x * sin(radian);
-			e->points[i].x = tmp_z * sin(radian) + e->points[i].x * cos(radian);
-			i++;
-		}
-}
-
-void	rotate_z(t_env *e, int angle)
-{
-		float radian = angle * PI / 180;
-		int i = 0;
-		int tmp_x;
-
-		while (i < 4)
-		{
-			tmp_x = e->points[i].x;
-
-			e->points[i].x = e->points[i].x * cos(radian) - e->points[i].y * sin(radian);
-			e->points[i].y = tmp_x * sin(radian) + e->points[i].y * cos(radian);
-			i++;
-		}
-}
-
-
-void	move_all(t_env *e, int move_x, int move_y)
-{
-	int i = 0;
-
-	while (i < 4)
-	{
-		e->points[i].x += move_x;
-		e->points[i].y += move_y;
 		i++;
 	}
 }
 
-void	draw_triangle(t_env *e, int size, int start)
+void	draw_all(t_env *e)
 {
-	int 	end;
+	int i = 0;
+	int j = 0;
 
-	end 	= start + size;
+	while (i <  e->l_nb)
+	{
+		j = 0;
+		while (j < e->p_nb)
+		{
+			e->line_color = 838835;
+			ARG_FROM_X = e->map[i][j].x;
+			ARG_FROM_Y = e->map[i][j].y;
+			if (j + 1 < e->p_nb)
+			{
+				ARG_TO_X = e->map[i][j + 1].x; 
+				ARG_TO_Y = e->map[i][j + 1].y;
+				bresenham_line(e);
 
-	e->points[0] = fill_point(start, start, start);
-	e->points[1] = fill_point(end, start , start);
-	e->points[2] = fill_point(start, end, start);
-	e->points[3] = fill_point(start, start, end);
 
-	rotate_z(e, e->tmp_angle);
-	rotate_x(e, e->tmp_angle);
-	rotate_y(e, e->tmp_angle);
-
-	move_all(e, WIDTH/2, HEIGHT/2); //move to the center for a nice view!!! ^^
-	line_fill_param(e, e->points[0].x, e->points[0].y, e->points[1].x, e->points[1].y);
-	bresenham_line(e);
-	line_fill_param(e, e->points[1].x, e->points[1].y, e->points[2].x, e->points[2].y);
-	bresenham_line(e);
-	line_fill_param(e, e->points[2].x, e->points[2].y, e->points[0].x, e->points[0].y);
-	bresenham_line(e);
-
-	line_fill_param(e, e->points[0].x, e->points[0].y, e->points[3].x, e->points[3].y);
-	bresenham_line(e);
-	line_fill_param(e, e->points[1].x, e->points[1].y, e->points[3].x, e->points[3].y);
-	bresenham_line(e);
-	line_fill_param(e, e->points[2].x, e->points[2].y, e->points[3].x, e->points[3].y);
-	bresenham_line(e);
+			}
+			if (i + 1 < e->l_nb)
+			{
+				ARG_TO_X = e->map[i + 1][j].x; 
+				ARG_TO_Y = e->map[i + 1][j].y;
+				bresenham_line(e);
+			}
+			j++;
+		}
+		i++;
+	}
 }
 
-void	draw_line_and_rotate(t_env *e)
-{
-	e->points = malloc(sizeof(t_point) * 4);
-	//move_all(e, -center_x, -center_y);
-
-	draw_triangle(e, 100, 0);
-	draw_triangle(e, 300, 0);
-}
-
-int key_draw(int keycode, t_env *e)
+void	draw_each_frame(t_env *e)
 {
 	mlx_clear_window(e->mlx, e->win);
-	if (keycode == 123)
-	{
-		e->tmp_angle -= 50;
-	}
-	if (keycode == 124)
-	{
-		e->tmp_angle += 50;
-	}
-	draw_line_and_rotate(e);
-	return (1);
+	matrix_reset(e);
+	transform(e);
+	draw_all(e);
 }
 
-int loop_draw(t_env *e)
+int		loop_draw(t_env *e)
 {
-	mlx_clear_window(e->mlx, e->win);
-
-	e->tmp_angle += 1; //SPEEED!
-	e->line_color = random() % 16581375;
-	draw_line_and_rotate(e);
-	return (1);
+	e->angle_x +=1;
+	e->angle_y += 1;
+	draw_each_frame(e);
+	return (0);
 }
 
 int		main(int argc, char *argv[])
@@ -219,17 +108,22 @@ int		main(int argc, char *argv[])
 		i_will_read(e);
 		close(e->fd);
 	}
+	else
+	{
+		ft_putstr("Give me a map!");
+		return (0);
+	}
 
 	e->mlx = mlx_init();
 	e->win = mlx_new_window(e->mlx, WIDTH, HEIGHT, "mlx 42");
+	/* ************************************************************************** */
+	i_will_init(e);
+	transform(e);
+	draw_all(e);
+	/* ************************************************************************** */
 
-
-	draw_line_and_rotate(e);
-
-	e->tmp_angle = 0;
 	mlx_key_hook(e->win, key_draw, e);
-	mlx_key_hook(e->win, key_exit, e);
-	mlx_loop_hook(e->mlx, loop_draw, e);
+	// mlx_loop_hook(e->mlx, loop_draw, e);
 	mlx_loop(e->mlx);
 	return (0);
 }

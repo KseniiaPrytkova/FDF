@@ -22,7 +22,7 @@
 # include "get_next_line.h"
 
 # define WIDTH 1200
-# define HEIGHT 1200
+# define HEIGHT 800
 # define MARGIN 10 
 # define PI 3.14159265359
 // # define X_WINDOW MARGIN + (1.0 / 2) * (X_Log + 1) * (Width - 2 * MARGIN);
@@ -70,9 +70,6 @@ typedef struct	s_env
 	int 		angle_x;
 	int 		angle_y;
 	int 		angle_z;
-	int			tmp_angle;
-	t_point		*points;
-
 }				t_env;
 
 int				get_next_line(const int fd, char **line);
@@ -88,6 +85,11 @@ void	i_will_move(t_point *current_point, t_env *e);
 void	i_will_rotate(t_point *current_point, t_env *e);
 
 void 	transform(t_env *e);
+int key_draw(int keycode, t_env *e);
+void	draw_all(t_env *e);
+void	matrix_reset(t_env *e);
+void	draw_each_frame(t_env *e);
+
 
 
 #endif
