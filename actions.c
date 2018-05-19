@@ -32,13 +32,13 @@ int key_draw(int keycode, t_env *e)
 	}
 	if (keycode == 126)
 	{
-		e->angle_x += 1;
+		e->angle_x += 0.1;
 		// e->angle_y += 10;
 		// e->angle_z += 3;
 	}
 	if (keycode == 125)
 	{
-		e->angle_x -= 1;
+		e->angle_x -= 0.1;
 	}
 	draw_each_frame(e);
 	return (-1);

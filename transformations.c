@@ -70,9 +70,9 @@ void 	i_will_init(t_env *e)
 	e->scale_z = 40;
 	e->scale = 40;
 
-	e->angle_x = 0.1;
-	e->angle_y = 0.1;
-	e->angle_z = 0.1;
+	e->angle_x = 0.0;
+	e->angle_y = 0.0;
+	e->angle_z = 0.0;
 	e->depth = 0.1;
 }
 
