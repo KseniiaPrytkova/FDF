@@ -14,7 +14,6 @@
 
 void	rotate_x(t_point *current_point, t_env *e, int angle)
 {
-		float radian = angle * PI / 180;
 		int i = 0;
 		int tmp_y;
 
@@ -22,31 +21,27 @@ void	rotate_x(t_point *current_point, t_env *e, int angle)
 		{
 			tmp_y = current_point->y;
 
-			current_point->y = current_point->y * cos(radian) - current_point->z * sin(radian);
-			current_point->z = tmp_y * sin(radian) + current_point->z * cos(radian);
+			current_point->y = current_point->y * cos(angle) - (current_point->z * e->depth) * sin(angle);
+
 			i++;
 		}
 }
 
 void	rotate_y(t_point *current_point, t_env *e, int angle)
 {
-		float radian = angle * PI / 180;
 		int i = 0;
 		int tmp_z;
 
 		while (i < 4)
 		{
 			tmp_z = current_point->z;
-
-			current_point->z = current_point->z * cos(radian) - current_point->x * sin(radian);
-			current_point->x = tmp_z * sin(radian) + current_point->x * cos(radian);
+			current_point->x = (tmp_z * e->depth) * sin(angle) + current_point->x * cos(angle);
 			i++;
 		}
 }
 
 void	rotate_z(t_point *current_point, t_env *e, int angle)
 {
-		float radian = angle * PI / 180;
 		int i = 0;
 		int tmp_x;
 
@@ -54,8 +49,8 @@ void	rotate_z(t_point *current_point, t_env *e, int angle)
 		{
 			tmp_x = current_point->x;
 
-			current_point->x = current_point->x * cos(radian) - current_point->y * sin(radian);
-			current_point->y = tmp_x * sin(radian) + current_point->y * cos(radian);
+			current_point->x = current_point->x * cos(angle) - current_point->y * sin(angle);
+			current_point->y = tmp_x * sin(angle) + current_point->y * cos(angle);
 			i++;
 		}
 }
@@ -73,10 +68,12 @@ void 	i_will_init(t_env *e)
 	e->scale_x = 40;
 	e->scale_y = 40;
 	e->scale_z = 40;
+	e->scale = 40;
 
-	e->angle_x = 0;
-	e->angle_y = 0;
-	e->angle_z = 0;
+	e->angle_x = 0.1;
+	e->angle_y = 0.1;
+	e->angle_z = 0.1;
+	e->depth = 0.1;
 }
 
 
@@ -112,10 +109,54 @@ void move_to_center(t_point *current_point, t_env *e)
 	// current_point->z = current_point->z - e->move_z;
 }
 
+// t_point	t_linear(t_env *e, t_point p)
+// {
+// 	t_point tmp;
+
+// 	tmp.x = p.x;
+// 	tmp.y = p.y;
+// 	tmp.z = p.z;
+// 	p.x = e->scale * 
+// 	((tmp.x - e->p_nb / 2)
+// 	* cos(e->angle_y)
+// 	* cos(e->angle_z) - (tmp.y - e->l_nb / 2)
+// 	* sin(e->angle_z) * cos(e->angle_y) - tmp.z
+// 	* e->depth * sin(e->angle_y));
+
+
+// 	p.y = e->scale * ((tmp.x - e->p_nb / 2)
+// 	* (-sin(e->angle_x) * sin(e->angle_y)
+// 	* cos(e->angle_z) + cos(e->angle_x) * sin(e->angle_z))
+// 	+ (p.y - e->l_nb / 2) * (sin(e->angle_x) * sin(e->angle_y)
+// 	* sin(e->angle_z) +
+// 	cos(e->angle_x) * cos(e->angle_z)) + tmp.z
+// 	* e->depth * (-sin(e->angle_x)) * cos(e->angle_y));
+// 	return (p);
+// }
+
+static	void	linear(t_env *e, int i, int j, int y)
+{
+	e->map[i][j].x =
+	e->scale * (
+	(e->map[i][j].x_before - e->p_nb / 2) * cos(e->angle_y) *
+	cos(e->angle_z) -
+	(y - e->l_nb / 2) * sin(e->angle_z) *
+	cos(e->angle_y) -
+	e->map[i][j].z_before * e->depth * sin(e->angle_y));
+	e->map[i][j].y =
+	e->scale * ((e->map[i][j].x_before - e->p_nb / 2) *
+	(-sin(e->angle_x) * sin(e->angle_y) * cos(e->angle_z) +
+	cos(e->angle_x) * sin(e->angle_z)) + (y - e->l_nb / 2)
+	* (sin(e->angle_x) * sin(e->angle_y) * sin(e->angle_z) +
+	cos(e->angle_x) * cos(e->angle_z)) + e->map[i][j].z_before
+	* e->depth * (-sin(e->angle_x)) * cos(e->angle_y));
+}
+
 void 	transform(t_env *e)
 {
 	int i;
 	int	j;
+	int y;
 	// int half_x;
 	// int half_y;
 
@@ -128,13 +169,17 @@ void 	transform(t_env *e)
 		while (j < e->p_nb)
 		{
 
-			move_on_half_back(&(e->map[i][j]), e);
+			//move_on_half_back(&(e->map[i][j]), e);
 
-			rotate_z(&(e->map[i][j]), e, e->angle_z);
-			rotate_x(&(e->map[i][j]), e, e->angle_x);
-			rotate_y(&(e->map[i][j]), e, e->angle_y);
+			//rotate_z(&(e->map[i][j]), e, e->angle_z);
+			y = e->map[i][j].y;
+			linear(e, i, j ,y);
+			//e->map[i][j] = t_linear(e, e->map[i][j]);
+			//rotate_x(&(e->map[i][j]), e, e->angle_x);
+			//i_will_scale(&(e->map[i][j]), e);
+			//rotate_y(&(e->map[i][j]), e, e->angle_y);
 
-			i_will_scale(&(e->map[i][j]), e);
+	
 			move_to_center(&(e->map[i][j]), e);
 
 

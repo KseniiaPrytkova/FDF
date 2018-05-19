@@ -24,7 +24,6 @@
 # define WIDTH 1200
 # define HEIGHT 800
 # define MARGIN 10 
-# define PI 3.14159265359
 // # define X_WINDOW MARGIN + (1.0 / 2) * (X_Log + 1) * (Width - 2 * MARGIN);
 // # define Y_WINDOW 
 # define ARG_FROM_X	e->x0
@@ -67,9 +66,11 @@ typedef struct	s_env
 	int			scale_x;
 	int			scale_y;
 	int			scale_z;
-	int 		angle_x;
-	int 		angle_y;
-	int 		angle_z;
+	int		angle_x;
+	int		angle_y;
+	int		angle_z;
+	double			depth;
+	int			scale;
 }				t_env;
 
 int				get_next_line(const int fd, char **line);
@@ -89,7 +90,8 @@ int key_draw(int keycode, t_env *e);
 void	draw_all(t_env *e);
 void	matrix_reset(t_env *e);
 void	draw_each_frame(t_env *e);
-
+void	rotate_x(t_point *current_point, t_env *e, int angle);
+void	rotate_z(t_point *current_point, t_env *e, int angle);
 
 
 #endif

@@ -66,18 +66,21 @@ void	draw_all(t_env *e)
 	}
 }
 
+
 void	draw_each_frame(t_env *e)
 {
 	mlx_clear_window(e->mlx, e->win);
 	matrix_reset(e);
+	mlx_string_put(e->mlx, e->win, 20, 20, 0xFFFFFF, ft_itoa(e->angle_z));
 	transform(e);
 	draw_all(e);
 }
 
 int		loop_draw(t_env *e)
 {
-	e->angle_x +=1;
-	e->angle_y += 1;
+	//e->angle_z += 1;
+	//e->angle_x += 1;
+	e->angle_x += 1;
 	draw_each_frame(e);
 	return (0);
 }
@@ -120,10 +123,11 @@ int		main(int argc, char *argv[])
 	i_will_init(e);
 	transform(e);
 	draw_all(e);
+
 	/* ************************************************************************** */
 
 	mlx_key_hook(e->win, key_draw, e);
-	// mlx_loop_hook(e->mlx, loop_draw, e);
+	//mlx_loop_hook(e->mlx, loop_draw, e);
 	mlx_loop(e->mlx);
 	return (0);
 }

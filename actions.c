@@ -26,15 +26,19 @@ int key_draw(int keycode, t_env *e)
 	}
 	if (keycode == 27)
 	{
-		e->scale_x -= 1;
-		e->scale_y -= 1;
-		e->scale_z -= 1;
+		e->scale_x -= 0.1;
+		e->scale_y -= 0.1;
+		e->scale_z -= 0.1;
 	}
 	if (keycode == 126)
 	{
-		e->angle_x += 3;
+		e->angle_x += 1;
 		// e->angle_y += 10;
 		// e->angle_z += 3;
+	}
+	if (keycode == 125)
+	{
+		e->angle_x -= 1;
 	}
 	draw_each_frame(e);
 	return (-1);
