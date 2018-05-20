@@ -66,10 +66,13 @@ typedef struct	s_env
 	int			scale_x;
 	int			scale_y;
 	int			scale_z;
+
 	double		angle_x;
 	double		angle_y;
 	double		angle_z;
-	double			depth;
+	
+	double		depth;
+
 	int			scale;
 }				t_env;
 
