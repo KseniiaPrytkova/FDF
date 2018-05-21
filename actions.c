@@ -26,6 +26,10 @@ void guess_color(int keycode, t_env *e)
 		{
 			e->color_change = 2;
 		}
+		if (keycode == 21)
+		{
+			e->color_change = 3;
+		}
 		// e->color_change = 3;
 	}
 
@@ -85,7 +89,7 @@ int key_draw(int keycode, t_env *e)
 	}
 
 	guess_color(keycode, e);
-	
+
 	draw_each_frame(e);
 	return (-1);
 }

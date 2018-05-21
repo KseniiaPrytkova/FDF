@@ -101,8 +101,10 @@ void	set_color(t_env *e, int z)
 	{
 		e->line_color = random() % 16581375;
 	}
-	
+	else if (e->color_change == 3)
+		e->line_color = 0xFFFFFF - (z * 20);
 }
+
 void	draw_all(t_env *e)
 {
 	int i = 0;
