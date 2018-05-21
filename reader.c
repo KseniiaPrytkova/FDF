@@ -85,7 +85,7 @@ static t_point	*map_maker(char **after_split, int y, t_env *e, int i)
 	return (map_vector);
 }
 
-void			i_will_read(t_env *e)
+int			i_will_read(t_env *e)
 {
 	char	*line;
 	char	**after_split;
@@ -96,15 +96,25 @@ void			i_will_read(t_env *e)
 	counter = 0;
 	i = 0;
 	if (!(e->map = (t_point **)malloc(sizeof(t_point *) * e->l_nb + 1)))
-		return ;
-	while (counter < e->l_nb)
+		return (0);
+	if (e->l_nb >= 2 && e->p_nb >= 2)
 	{
-		get_next_line(e->fd, &line);
-		after_split = ft_split(line);
-		e->map[counter] = map_maker(after_split, counter, e, i);
-		counter++;
-		free(line);
-		free_array(after_split);
+		while (counter < e->l_nb)
+		{
+			get_next_line(e->fd, &line);
+			after_split = ft_split(line);
+			e->map[counter] = map_maker(after_split, counter, e, i);
+			counter++;
+			free(line);
+			free_array(after_split);
+		}
+		e->map[e->l_nb] = NULL;
+		return (1);
 	}
-	e->map[e->l_nb] = NULL;
+	else
+	{
+		ft_putstr("usage: INVALID MAP[i need bigger map!]\n");
+		return (0);
+	}
+	
 }

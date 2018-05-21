@@ -39,14 +39,27 @@ static void	matrix_reset(t_env *e)
 // 	return (0);
 // }
 
+void 	tips(t_env *e)
+{
+	mlx_string_put(e->mlx, e->win, 20, 10, 0xFFFFFF,  ft_strjoin("x_angle:", ft_itoa(e->angle_x)));
+	mlx_string_put(e->mlx, e->win, 20, 30, 0xFFFFFF,  ft_strjoin("y_angle:", ft_itoa(e->angle_y)));
+	mlx_string_put(e->mlx, e->win, 20, 50, 0xFFFFFF,  ft_strjoin("z_angle:", ft_itoa(e->angle_z)));
+
+	mlx_string_put(e->mlx, e->win, 20, 80, 0xB3EE3A,  "ZOOM: - || +");
+	mlx_string_put(e->mlx, e->win, 20, 100, 0xB3EE3A,  "ROTATE_X: up || down");
+	mlx_string_put(e->mlx, e->win, 20, 120, 0xB3EE3A,  "ROTATE_Y: left || right");
+	mlx_string_put(e->mlx, e->win, 20, 140, 0xB3EE3A,  "ROTATE_Z: q || a");
+	mlx_string_put(e->mlx, e->win, 20, 160, 0xB3EE3A,  "DEPTH: w || s");
+	mlx_string_put(e->mlx, e->win, 20, 180, 0xB3EE3A,  "RESET_ALL: space");
+}
+
 void	draw_each_frame(t_env *e)
 {
 	mlx_clear_window(e->mlx, e->win);
 	matrix_reset(e);
 
-	mlx_string_put(e->mlx, e->win, 20, 20, 0xFFFFFF,  ft_strjoin("x_angle:", ft_itoa(e->angle_x)));
-	mlx_string_put(e->mlx, e->win, 20, 40, 0xFFFFFF,  ft_strjoin("y_angle:", ft_itoa(e->angle_y)));
-	mlx_string_put(e->mlx, e->win, 20, 60, 0xFFFFFF,  ft_strjoin("z_angle:", ft_itoa(e->angle_z)));
+	tips(e);
+
 	transform(e);
 	draw_all(e);
 }
@@ -59,7 +72,7 @@ int select_scale(t_env *e)
 	int x_scale;
 	int y_scale;
 
-	percent = 60;
+	percent = 80;
 	x_val = (percent * WIDTH) / 100;
 	printf("%d\n", x_val );
 	y_val = (percent * HEIGHT) / 100;

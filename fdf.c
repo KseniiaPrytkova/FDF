@@ -35,7 +35,9 @@ int		main(int argc, char *argv[])
 		else
 			return (0);
 		e->fd = open(argv[1], O_RDONLY);
-		i_will_read(e);
+		if (!(i_will_read(e)))
+			return (0);
+		// i_will_read(e);
 		close(e->fd);
 	}
 	else
@@ -50,7 +52,6 @@ int		main(int argc, char *argv[])
 	i_will_init(e);
 	transform(e);
 	draw_all(e);
-
 	/* ************************************************************************** */
 
 	mlx_key_hook(e->win, key_draw, e);

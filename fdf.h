@@ -83,7 +83,7 @@ typedef struct	s_env
 int				get_next_line(const int fd, char **line);
 int				i_will_count_lines(t_env *e);
 char			**ft_split(char *str);
-void			i_will_read(t_env *e);
+int			i_will_read(t_env *e);
 int				ft_atoi_base(char *nb, int base);
 void			bresenham_line(t_env *e);
 
@@ -95,13 +95,12 @@ void	i_will_rotate(t_point *current_point, t_env *e);
 void 	transform(t_env *e);
 int key_draw(int keycode, t_env *e);
 void	draw_all(t_env *e);
-// void	matrix_reset(t_env *e);
-// void	draw_each_frame(t_env *e);
-void	rotate_x(t_point *current_point, t_env *e, int angle);
-void	rotate_z(t_point *current_point, t_env *e, int angle);
+
+
 
 void	draw_each_frame(t_env *e);
 int select_scale(t_env *e);
+void 	tips(t_env *e);
 
 
 

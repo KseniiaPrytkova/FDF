@@ -15,15 +15,12 @@
 
 void 	i_will_init(t_env *e)
 {
+
+	tips(e);
+
 	e->move_x = WIDTH / 2;
 	e->move_y = HEIGHT / 2;
-	// e->move_z = 10;
-	// e->scale_x = 40;
-	// e->scale_y = 40;
-	// e->scale_z = 40;
-
 	e->scale = select_scale(e);	
-	// e->scale = 40;
 
 	e->angle_x = 0;
 	e->angle_y = 0;
@@ -39,17 +36,6 @@ void move_to_center(t_point *current_point, t_env *e)
 
 }
 
-
-// static	void	linear(t_env *e, int i, int j, int y)
-// {
-// 	double rad_x = e->angle_x * M_PI / 180.0;
-// 	double rad_y = e->angle_y * M_PI / 180.0;
-// 	double rad_z  = e->angle_z * M_PI / 180.0;
-
-// 	e->map[i][j].x = e->scale * ((e->map[i][j].x_before - e->p_nb / 2) * cos(rad_y) * cos(rad_z) - (y - e->l_nb / 2) * sin(rad_z) * cos(rad_y) - e->map[i][j].z_before * e->depth * sin(rad_y));
-
-// 	e->map[i][j].y = e->scale * ((e->map[i][j].x_before - e->p_nb / 2) * (-sin(rad_x) * sin(rad_y) * cos(rad_z) + cos(rad_x) * sin(rad_z)) + (y - e->l_nb / 2) * (sin(rad_x) * sin(rad_y) * sin(rad_z) + cos(rad_x) * cos(rad_z)) + e->map[i][j].z_before * e->depth * (-sin(rad_x)) * cos(rad_y));
-// }
 
 static	void	linear(t_env *e, int i, int j, int y, double z_val)
 {

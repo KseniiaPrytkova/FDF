@@ -21,24 +21,16 @@ int key_draw(int keycode, t_env *e)
 	if (keycode == 24)
 	{
 		e->scale += 1;
-		// e->scale += 5;
-		// e->scale += 5;
-		printf("%d\n",e->scale );
 	}
 	if (keycode == 27)
 	{
 		if (e->scale != 0)
 			e->scale -= 1;
-
-		// e->scale -= 5;
-		// e->scale -= 5;
-		printf("%d\n",e->scale );
 	}
 	if (keycode == 126)
 	{
 		e->angle_x += 5;
-		// e->angle_y += 10;
-		// e->angle_z += 3;
+
 	}
 	if (keycode == 125)
 	{
@@ -47,8 +39,7 @@ int key_draw(int keycode, t_env *e)
 	if (keycode == 123)
 	{
 		e->angle_y += 5;
-		// e->angle_y += 10;
-		// e->angle_z += 3;
+
 	}
 	if (keycode == 124)
 	{
@@ -70,6 +61,7 @@ int key_draw(int keycode, t_env *e)
 	{
 		e->depth -= 0.1;
 	}
+	
 	if (keycode == 49)
 	{
 		i_will_init(e);
