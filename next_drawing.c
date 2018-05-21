@@ -41,16 +41,17 @@ static void	matrix_reset(t_env *e)
 
 void 	tips(t_env *e)
 {
-	mlx_string_put(e->mlx, e->win, 20, 10, 0xFFFFFF,  ft_strjoin("x_angle:", ft_itoa(e->angle_x)));
-	mlx_string_put(e->mlx, e->win, 20, 30, 0xFFFFFF,  ft_strjoin("y_angle:", ft_itoa(e->angle_y)));
-	mlx_string_put(e->mlx, e->win, 20, 50, 0xFFFFFF,  ft_strjoin("z_angle:", ft_itoa(e->angle_z)));
+	// mlx_string_put(e->mlx, e->win, 20, 10, 0xFFFFFF,  ft_strjoin("x_angle:", ft_itoa(e->angle_x)));
+	// mlx_string_put(e->mlx, e->win, 20, 30, 0xFFFFFF,  ft_strjoin("y_angle:", ft_itoa(e->angle_y)));
+	// mlx_string_put(e->mlx, e->win, 20, 50, 0xFFFFFF,  ft_strjoin("z_angle:", ft_itoa(e->angle_z)));
 
-	mlx_string_put(e->mlx, e->win, 20, 80, 0xB3EE3A,  "ZOOM: - || +");
-	mlx_string_put(e->mlx, e->win, 20, 100, 0xB3EE3A,  "ROTATE_X: up || down");
-	mlx_string_put(e->mlx, e->win, 20, 120, 0xB3EE3A,  "ROTATE_Y: left || right");
-	mlx_string_put(e->mlx, e->win, 20, 140, 0xB3EE3A,  "ROTATE_Z: q || a");
-	mlx_string_put(e->mlx, e->win, 20, 160, 0xB3EE3A,  "DEPTH: w || s");
-	mlx_string_put(e->mlx, e->win, 20, 180, 0xB3EE3A,  "RESET_ALL: space");
+	mlx_string_put(e->mlx, e->win, 20, 10, 0x0033CC,  "ZOOM: - || +");
+	mlx_string_put(e->mlx, e->win, 20, 30, 0x0033CC,  "ROTATE_X: up || down");
+	mlx_string_put(e->mlx, e->win, 20, 50, 0x0033CC,  "ROTATE_Y: left || right");
+	mlx_string_put(e->mlx, e->win, 20, 70, 0x0033CC,  "ROTATE_Z: q || a");
+	mlx_string_put(e->mlx, e->win, 20, 90, 0x0033CC,  "DEPTH: w || s");
+	mlx_string_put(e->mlx, e->win, 20, 110, 0x0033CC,  "RESET_ALL: space");
+	mlx_string_put(e->mlx, e->win, 20, 130, 0x0033CC,  "CHANGE_COLOUR: 1 || 2 || 3");
 }
 
 void	draw_each_frame(t_env *e)

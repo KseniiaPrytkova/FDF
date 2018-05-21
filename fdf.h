@@ -72,6 +72,7 @@ typedef struct	s_env
 	double		angle_z;
 	
 	double		depth;
+	int			color_change;
 
 	int			scale;
 
@@ -101,6 +102,7 @@ void	draw_all(t_env *e);
 void	draw_each_frame(t_env *e);
 int select_scale(t_env *e);
 void 	tips(t_env *e);
+
 
 
 

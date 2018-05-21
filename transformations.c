@@ -26,6 +26,7 @@ void 	i_will_init(t_env *e)
 	e->angle_y = 0;
 	e->angle_z = 0;
 	e->depth = 0.3;
+	e->color_change = 0;
 }
 
 void move_to_center(t_point *current_point, t_env *e)
@@ -85,6 +86,23 @@ void 	transform(t_env *e)
 	}
 }
 
+void	set_color(t_env *e, int z)
+{
+
+	if (e->color_change == 0)
+	{
+		e->line_color = 0x33333377 + (z * 10);
+	}
+	else if (e->color_change == 1)
+	{
+		e->line_color = 0x33673377 + (z * 10);
+	}
+	else if (e->color_change == 2)
+	{
+		e->line_color = random() % 16581375;
+	}
+	
+}
 void	draw_all(t_env *e)
 {
 	int i = 0;
@@ -95,7 +113,8 @@ void	draw_all(t_env *e)
 		j = 0;
 		while (j < e->p_nb)
 		{
-			e->line_color = 838835;
+			set_color(e, e->map[i][j].z);
+
 			ARG_FROM_X = e->map[i][j].x;
 			ARG_FROM_Y = e->map[i][j].y;
 			if (j + 1 < e->p_nb)

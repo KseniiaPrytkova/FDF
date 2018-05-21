@@ -12,6 +12,23 @@
 
 #include "fdf.h"
 
+void guess_color(int keycode, t_env *e)
+	{
+		if (keycode == 18)
+		{
+			e->color_change = 0;
+		}
+		if (keycode == 19)
+		{
+			e->color_change = 1;
+		}
+		if (keycode == 20)
+		{
+			e->color_change = 2;
+		}
+		// e->color_change = 3;
+	}
+
 int key_draw(int keycode, t_env *e)
 {
 	if (keycode == 53)
@@ -66,6 +83,9 @@ int key_draw(int keycode, t_env *e)
 	{
 		i_will_init(e);
 	}
+
+	guess_color(keycode, e);
+	
 	draw_each_frame(e);
 	return (-1);
 }
