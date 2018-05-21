@@ -4,6 +4,7 @@
 [MAP_GENERATOR](https://github.com/jgigault/42MapGenerator)
 
 ![alternativetext](go_MinilibX/mars.png)
+
 ![alternativetext](go_MinilibX/pyra.png)
 
 ## STEP 1. Bresenham's line algorithm
