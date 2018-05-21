@@ -12,80 +12,6 @@
 
 #include "fdf.h"
 
-
-void	matrix_reset(t_env *e)
-{
-	int i;
-	int	j;
-
-	i = 0;
-	while (i <  e->l_nb)
-	{
-		j = 0;
-		while (j < e->p_nb)
-		{
-			e->map[i][j].x = e->map[i][j].x_before;
-			e->map[i][j].y = e->map[i][j].y_before;
-			e->map[i][j].z = e->map[i][j].z_before;
-			j++;
-		}
-		i++;
-	}
-}
-
-
-void	draw_all(t_env *e)
-{
-	int i = 0;
-	int j = 0;
-
-	while (i <  e->l_nb)
-	{
-		j = 0;
-		while (j < e->p_nb)
-		{
-			e->line_color = 838835;
-			ARG_FROM_X = e->map[i][j].x;
-			ARG_FROM_Y = e->map[i][j].y;
-			if (j + 1 < e->p_nb)
-			{
-				ARG_TO_X = e->map[i][j + 1].x; 
-				ARG_TO_Y = e->map[i][j + 1].y;
-				bresenham_line(e);
-
-
-			}
-			if (i + 1 < e->l_nb)
-			{
-				ARG_TO_X = e->map[i + 1][j].x; 
-				ARG_TO_Y = e->map[i + 1][j].y;
-				bresenham_line(e);
-			}
-			j++;
-		}
-		i++;
-	}
-}
-
-
-void	draw_each_frame(t_env *e)
-{
-	mlx_clear_window(e->mlx, e->win);
-	matrix_reset(e);
-	mlx_string_put(e->mlx, e->win, 20, 20, 0xFFFFFF, ft_itoa(e->angle_z));
-	transform(e);
-	draw_all(e);
-}
-
-int		loop_draw(t_env *e)
-{
-	// e->angle_z += 1;
-	// e->angle_x += 1;
-	e->angle_x += 1;
-	draw_each_frame(e);
-	return (0);
-}
-
 int		main(int argc, char *argv[])
 {
 	t_env *e;
@@ -93,7 +19,7 @@ int		main(int argc, char *argv[])
 
 	if (!(e = (t_env *)malloc(sizeof(t_env))))
 	{
-		ft_putstr("bad malloc");
+		ft_putstr("BAD MALLOC");
 		return (0);
 	}
 	e->l_nb = 0;
@@ -114,7 +40,7 @@ int		main(int argc, char *argv[])
 	}
 	else
 	{
-		ft_putstr("Give me a map!");
+		ft_putstr("GIVE ME A MAP!");
 		return (0);
 	}
 

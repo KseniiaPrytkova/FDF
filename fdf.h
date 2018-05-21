@@ -74,6 +74,10 @@ typedef struct	s_env
 	double		depth;
 
 	int			scale;
+
+	// double rad_x;
+	// double rad_y;
+	// double rad_z;
 }				t_env;
 
 int				get_next_line(const int fd, char **line);
@@ -91,10 +95,14 @@ void	i_will_rotate(t_point *current_point, t_env *e);
 void 	transform(t_env *e);
 int key_draw(int keycode, t_env *e);
 void	draw_all(t_env *e);
-void	matrix_reset(t_env *e);
-void	draw_each_frame(t_env *e);
+// void	matrix_reset(t_env *e);
+// void	draw_each_frame(t_env *e);
 void	rotate_x(t_point *current_point, t_env *e, int angle);
 void	rotate_z(t_point *current_point, t_env *e, int angle);
+
+void	draw_each_frame(t_env *e);
+int select_scale(t_env *e);
+
 
 
 #endif
