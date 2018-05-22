@@ -12,6 +12,28 @@
 
 #include "fdf.h"
 
+int		is_it_hex(char *str)
+{
+	unsigned char	ch;
+	int				i;
+
+	i = 0;
+	if (*str == '0' && *(str + 1) == 'x')
+	{
+		str = str + 2;
+		while (*str)
+		{
+			ch = (unsigned char)*str;
+			if (ft_isalnum((int)ch) != 1)
+				return (0);
+			str++;
+		}
+		return (1);
+	}
+	else
+		return (0);
+}
+
 static void			i_will_echo(int nb)
 {
 	if (nb == 1)

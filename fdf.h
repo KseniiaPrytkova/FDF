@@ -78,26 +78,30 @@ typedef struct	s_env
 
 	int			scale;
 
-	// double rad_x;
-	// double rad_y;
-	// double rad_z;
+	double rad_x;
+	double rad_y;
+	double rad_z;
+
+	int i;
+	int j;
 }				t_env;
 
 int				get_next_line(const int fd, char **line);
 int				i_will_count_lines(t_env *e);
 char			**ft_split(char *str);
 int			i_will_read(t_env *e);
+int		is_it_hex(char *str);
 int				ft_atoi_base(char *nb, int base);
 void			bresenham_line(t_env *e);
 
 void 	i_will_init(t_env *e);
-void	i_will_scale(t_point *current_point, t_env *e);
-void	i_will_move(t_point *current_point, t_env *e);
-void	i_will_rotate(t_point *current_point, t_env *e);
+
 
 void 	transform(t_env *e);
-int key_draw(int keycode, t_env *e);
+void		move_to_center(t_point *current_point, t_env *e);
 void	draw_all(t_env *e);
+int key_draw(int keycode, t_env *e);
+
 
 
 

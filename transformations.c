@@ -12,134 +12,99 @@
 
 #include "fdf.h"
 
-
-void 	i_will_init(t_env *e)
+static	void	points_from(t_env *e, int i, int j)
 {
-
-	tips(e);
-
-	e->move_x = WIDTH / 2;
-	e->move_y = HEIGHT / 2;
-	e->scale = select_scale(e);	
-
-	e->angle_x = 0;
-	e->angle_y = 0;
-	e->angle_z = 0;
-	e->depth = 0.3;
-	e->color_change = 0;
+	ARG_FROM_X = e->map[i][j].x;
+	ARG_FROM_Y = e->map[i][j].y;
 }
 
-void move_to_center(t_point *current_point, t_env *e)
+static	void	linear(t_env *e, int i, int j, int y)
 {
+	int		p_half;
+	int		l_half;
+	double	z_val;
 
-	current_point->x = current_point->x + WIDTH / 2;
-	current_point->y = current_point->y + HEIGHT / 2;
-
-}
-
-
-static	void	linear(t_env *e, int i, int j, int y, double z_val)
-{
-	double rad_x = e->angle_x * M_PI / 180.0;
-	double rad_y = e->angle_y * M_PI / 180.0;
-	double rad_z  = e->angle_z * M_PI / 180.0;
-
-	int p_half;
-	int l_half;
-
+	e->rad_x = e->angle_x * M_PI / 180.0;
+	e->rad_y = e->angle_y * M_PI / 180.0;
+	e->rad_z = e->angle_z * M_PI / 180.0;
 	p_half = e->map[i][j].x_before - e->p_nb / 2;
 	l_half = y - e->l_nb / 2;
-
+	z_val = (double)(e->map[i][j].z_before) * e->depth;
 	e->map[i][j].x = e->scale *
-	(p_half * cos(rad_y) * cos(rad_z) - 
-		l_half * sin(rad_z) * cos(rad_y) - 
-		z_val * sin(rad_y));
-
-	e->map[i][j].y = e->scale * 
-	(p_half * (-sin(rad_x) * sin(rad_y) * cos(rad_z) + cos(rad_x) * sin(rad_z)) + 
-		l_half * (sin(rad_x) * sin(rad_y) * sin(rad_z) + cos(rad_x) * cos(rad_z)) + 
-		z_val * (-sin(rad_x)) * cos(rad_y));
+	(p_half * cos(e->rad_y) * cos(e->rad_z) -
+		l_half * sin(e->rad_z) * cos(e->rad_y) -
+		z_val * sin(e->rad_y));
+	e->map[i][j].y = e->scale *
+	(p_half * (-sin(e->rad_x) * sin(e->rad_y) * cos(e->rad_z) +
+		cos(e->rad_x) * sin(e->rad_z)) +
+		l_half * (sin(e->rad_x) * sin(e->rad_y) * sin(e->rad_z) +
+		cos(e->rad_x) * cos(e->rad_z)) +
+		z_val * (-sin(e->rad_x)) * cos(e->rad_y));
 }
 
-void 	transform(t_env *e)
+void			transform(t_env *e)
 {
-	int i;
-	int	j;
-	int y;
-	double z_val;
+	int		i;
+	int		j;
+	int		y;
+	double	z_val;
 
 	i = 0;
-	while (i <  e->l_nb)
+	while (i < e->l_nb)
 	{
 		j = 0;
 		while (j < e->p_nb)
 		{
-
 			y = e->map[i][j].y;
-				z_val = (double)(e->map[i][j].z_before) * e->depth;
-			linear(e, i, j ,y, z_val);	
+			linear(e, i, j, y);
 			move_to_center(&(e->map[i][j]), e);
-
 			j++;
 		}
 		i++;
 	}
 }
 
-void	set_color(t_env *e, int z)
+static void		set_color(t_env *e, int z)
 {
+	int i;
 
-int i = 0;
+	i = 0;
 	if (e->color_change == 0)
-	{
 		e->line_color = 0x0033CC;
-		// e->line_color = 0x33333377 + (z * 10);
-	}
+		/* e->line_color = 0x33333377 + (z * 10); */
 	else if (e->color_change == 1)
-	{
 		e->line_color = 0x33673377 + (z * 10);
-	}
 	else if (e->color_change == 2)
-	{
 		e->line_color = random() % 16581375;
-	}
 	else if (e->color_change == 3)
-	{
 		e->line_color = 0xFFFFFF - (z * 20);
-	}
 }
 
-void	draw_all(t_env *e)
+void			draw_all(t_env *e)
 {
-	int i = 0;
-	int j = 0;
+	int i;
+	int j;
 
-	while (i <  e->l_nb)
+	i = 0;
+	while (++i < e->l_nb)
 	{
 		j = 0;
-		while (j < e->p_nb)
+		while (++j < e->p_nb)
 		{
 			set_color(e, e->map[i][j].z);
-
-			ARG_FROM_X = e->map[i][j].x;
-			ARG_FROM_Y = e->map[i][j].y;
+			points_from(e, i, j);
 			if (j + 1 < e->p_nb)
 			{
-				ARG_TO_X = e->map[i][j + 1].x; 
+				ARG_TO_X = e->map[i][j + 1].x;
 				ARG_TO_Y = e->map[i][j + 1].y;
 				bresenham_line(e);
-
-
 			}
 			if (i + 1 < e->l_nb)
 			{
-				ARG_TO_X = e->map[i + 1][j].x; 
+				ARG_TO_X = e->map[i + 1][j].x;
 				ARG_TO_Y = e->map[i + 1][j].y;
 				bresenham_line(e);
 			}
-			j++;
 		}
-		i++;
 	}
 }
-

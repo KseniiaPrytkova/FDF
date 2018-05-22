@@ -25,28 +25,6 @@ static void		free_array(char **array)
 	free(array);
 }
 
-static int		is_it_hex(char *str)
-{
-	unsigned char	ch;
-	int				i;
-
-	i = 0;
-	if (*str == '0' && *(str + 1) == 'x')
-	{
-		str = str + 2;
-		while (*str)
-		{
-			ch = (unsigned char)*str;
-			if (ft_isalnum((int)ch) != 1)
-				return (0);
-			str++;
-		}
-		return (1);
-	}
-	else
-		return (0);
-}
-
 static void		filler(t_point *map_vector, char **after_split, int i, int y)
 {
 	map_vector[i].x = i;
@@ -85,29 +63,35 @@ static t_point	*map_maker(char **after_split, int y, t_env *e, int i)
 	return (map_vector);
 }
 
-int			i_will_read(t_env *e)
+static void		action_on_line(t_env *e, char *line, char **ss, int i)
+{
+	int	counter;
+
+	counter = 0;
+	while (counter < e->l_nb)
+	{
+		get_next_line(e->fd, &line);
+		ss = ft_split(line);
+		e->map[counter] = map_maker(ss, counter, e, i);
+		counter++;
+		free(line);
+		free_array(ss);
+	}
+}
+
+int				i_will_read(t_env *e)
 {
 	char	*line;
 	char	**after_split;
-	int		counter;
 	char	ch;
 	int		i;
 
-	counter = 0;
 	i = 0;
 	if (!(e->map = (t_point **)malloc(sizeof(t_point *) * e->l_nb + 1)))
 		return (0);
 	if (e->l_nb >= 2 && e->p_nb >= 2)
 	{
-		while (counter < e->l_nb)
-		{
-			get_next_line(e->fd, &line);
-			after_split = ft_split(line);
-			e->map[counter] = map_maker(after_split, counter, e, i);
-			counter++;
-			free(line);
-			free_array(after_split);
-		}
+		action_on_line(e, line, after_split, i);
 		e->map[e->l_nb] = NULL;
 		return (1);
 	}
@@ -116,5 +100,4 @@ int			i_will_read(t_env *e)
 		ft_putstr("usage: INVALID MAP[i need bigger map!]\n");
 		return (0);
 	}
-	
 }

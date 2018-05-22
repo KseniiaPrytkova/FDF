@@ -12,13 +12,19 @@
 
 #include "fdf.h"
 
+void		move_to_center(t_point *current_point, t_env *e)
+{
+	current_point->x = current_point->x + WIDTH / 2;
+	current_point->y = current_point->y + HEIGHT / 2;
+}
+
 static void	matrix_reset(t_env *e)
 {
 	int i;
 	int	j;
 
 	i = 0;
-	while (i <  e->l_nb)
+	while (i < e->l_nb)
 	{
 		j = 0;
 		while (j < e->p_nb)
@@ -32,40 +38,27 @@ static void	matrix_reset(t_env *e)
 	}
 }
 
-// int		loop_draw(t_env *e)
-// {
-// 	e->angle_x += 1;
-// 	draw_each_frame(e);
-// 	return (0);
-// }
-
-void 	tips(t_env *e)
+void		tips(t_env *e)
 {
-	// mlx_string_put(e->mlx, e->win, 20, 10, 0xFFFFFF,  ft_strjoin("x_angle:", ft_itoa(e->angle_x)));
-	// mlx_string_put(e->mlx, e->win, 20, 30, 0xFFFFFF,  ft_strjoin("y_angle:", ft_itoa(e->angle_y)));
-	// mlx_string_put(e->mlx, e->win, 20, 50, 0xFFFFFF,  ft_strjoin("z_angle:", ft_itoa(e->angle_z)));
-
-	mlx_string_put(e->mlx, e->win, 20, 10, 0x0033CC,  "ZOOM: - || +");
-	mlx_string_put(e->mlx, e->win, 20, 30, 0x0033CC,  "ROTATE_X: up || down");
-	mlx_string_put(e->mlx, e->win, 20, 50, 0x0033CC,  "ROTATE_Y: left || right");
-	mlx_string_put(e->mlx, e->win, 20, 70, 0x0033CC,  "ROTATE_Z: q || a");
-	mlx_string_put(e->mlx, e->win, 20, 90, 0x0033CC,  "DEPTH: w || s");
-	mlx_string_put(e->mlx, e->win, 20, 110, 0x0033CC,  "RESET_ALL: space");
-	mlx_string_put(e->mlx, e->win, 20, 130, 0x0033CC,  "CHANGE_COLOUR: 1 || 2 || 3");
+	mlx_string_put(e->mlx, e->win, 20, 10, 0x0033CC, "ZOOM: - || +");
+	mlx_string_put(e->mlx, e->win, 20, 30, 0x0033CC, "ROTATE_X: up || down");
+	mlx_string_put(e->mlx, e->win, 20, 50, 0x0033CC, "ROTATE_Y: left || right");
+	mlx_string_put(e->mlx, e->win, 20, 70, 0x0033CC, "ROTATE_Z: q || a");
+	mlx_string_put(e->mlx, e->win, 20, 90, 0x0033CC, "DEPTH: w || s");
+	mlx_string_put(e->mlx, e->win, 20, 110, 0x0033CC, "RESET_ALL: space");
+	mlx_string_put(e->mlx, e->win, 20, 130, 0x0033CC, "COLOUR: 1 || 2 || 3");
 }
 
-void	draw_each_frame(t_env *e)
+void		draw_each_frame(t_env *e)
 {
 	mlx_clear_window(e->mlx, e->win);
 	matrix_reset(e);
-
 	tips(e);
-
 	transform(e);
 	draw_all(e);
 }
 
-int select_scale(t_env *e)
+int			select_scale(t_env *e)
 {
 	int percent;
 	int x_val;
@@ -75,19 +68,12 @@ int select_scale(t_env *e)
 
 	percent = 80;
 	x_val = (percent * WIDTH) / 100;
-	printf("%d\n", x_val );
 	y_val = (percent * HEIGHT) / 100;
-	printf("%d\n", y_val );
-
 	x_scale = x_val / e->p_nb;
-	printf("%d\n", x_scale );
-
 	y_scale = y_val / e->l_nb;
-	printf("%d\n", y_val );
 	if (x_scale > y_scale)
 		e->scale = y_scale;
 	else
 		e->scale = x_scale;
-	printf("scale:%d\n", e->scale );
 	return (e->scale);
 }
