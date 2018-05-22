@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "./includes/fdf.h"
 
 void 	i_will_init(t_env *e)
 {
@@ -26,14 +26,14 @@ void 	i_will_init(t_env *e)
 	e->color_change = 0;
 }
 
-int		exit_x(void)
+static int		exit_x(void)
 {
 	system("leaks a.out");
 	exit(1);
 	return (0);
 }
 
-void	to_do_list(t_env *e)
+static void		to_do_list(t_env *e)
 {
 	i_will_init(e);
 	transform(e);
@@ -43,10 +43,17 @@ void	to_do_list(t_env *e)
 	mlx_hook(e->win, 17, 1L << 17, exit_x, NULL);
 }
 
-int		i_work_with_argv(t_env *e, char *s, char *name)
+static int		i_work_with_argv(t_env *e, char *s, char *name)
 {
+	int fd;
+
+	fd = open(s, O_DIRECTORY);
+		if (fd >= 0)
+			exit(0);
 	e->fd = open(name, O_RDONLY);
 	if (i_will_count_lines(e) != 1)
+		return (0);
+	if (e->p_nb < 1 || e->l_nb < 1)
 		return (0);
 	e->fd = open(s, O_RDONLY);
 	if (!(i_will_read(e)))
@@ -58,7 +65,6 @@ int		i_work_with_argv(t_env *e, char *s, char *name)
 int		main(int argc, char *argv[])
 {
 	t_env	*e;
-	int		j;
 
 	if (!(e = (t_env *)malloc(sizeof(t_env))))
 	{
@@ -68,7 +74,10 @@ int		main(int argc, char *argv[])
 	e->l_nb = 0;
 	e->map_name = argv[1];
 	if (argc == 2)
-		i_work_with_argv(e, argv[1], e->map_name);
+	{	
+		if (!(i_work_with_argv(e, argv[1], e->map_name)))
+			return (0);
+	}
 	else
 	{
 		ft_putstr("GIVE ME A MAP!");

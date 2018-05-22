@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "./includes/fdf.h"
 
-void	guess_color(int keycode, t_env *e)
+static void		guess_color(int keycode, t_env *e)
 {
 	if (keycode == 18)
 		e->color_change = 0;
@@ -24,7 +24,7 @@ void	guess_color(int keycode, t_env *e)
 		e->color_change = 3;
 }
 
-void	change_angle(int keycode, t_env *e)
+static void		change_angle(int keycode, t_env *e)
 {
 	if (keycode == 126)
 		e->angle_x += 5;
@@ -40,7 +40,7 @@ void	change_angle(int keycode, t_env *e)
 		e->angle_z -= 5;
 }
 
-int		key_draw(int keycode, t_env *e)
+int			key_draw(int keycode, t_env *e)
 {
 	if (keycode == 53)
 		exit(1);

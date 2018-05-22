@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "./includes/fdf.h"
 
 static int	i_will_power(int nb, int power)
 {
@@ -55,7 +55,7 @@ static int	i_will_convert(char c, int base)
 		return (-1);
 }
 
-static int	length_number(char *str, int base)
+static int	length_number(char *str)
 {
 	int		counter;
 
@@ -81,7 +81,7 @@ int			ft_atoi_base(char *nb, int base)
 		return (ft_atoi(nb));
 	while ((nb[i] == ' ') || (nb[i] == '\n') || (nb[i] == '\t'))
 		i++;
-	length = length_number(nb, base) - 1;
+	length = length_number(nb) - 1;
 	while (*nb && length >= 0 && i_will_convert(*nb, base) != -1)
 	{
 		result += i_will_convert(*nb, base) * i_will_power(base, length);

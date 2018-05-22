@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "./includes/fdf.h"
 
 static void		free_array(char **array)
 {
@@ -83,10 +83,11 @@ int				i_will_read(t_env *e)
 {
 	char	*line;
 	char	**after_split;
-	char	ch;
 	int		i;
 
 	i = 0;
+	line = NULL;
+	after_split = NULL;
 	if (!(e->map = (t_point **)malloc(sizeof(t_point *) * e->l_nb + 1)))
 		return (0);
 	if (e->l_nb >= 2 && e->p_nb >= 2)

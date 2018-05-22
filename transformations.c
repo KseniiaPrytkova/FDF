@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "./includes/fdf.h"
 
 static	void	points_from(t_env *e, int i, int j)
 {
@@ -47,7 +47,6 @@ void			transform(t_env *e)
 	int		i;
 	int		j;
 	int		y;
-	double	z_val;
 
 	i = 0;
 	while (i < e->l_nb)
@@ -57,7 +56,7 @@ void			transform(t_env *e)
 		{
 			y = e->map[i][j].y;
 			linear(e, i, j, y);
-			move_to_center(&(e->map[i][j]), e);
+			move_to_center(&(e->map[i][j]));
 			j++;
 		}
 		i++;

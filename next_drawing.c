@@ -10,15 +10,15 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "./includes/fdf.h"
 
-void		move_to_center(t_point *current_point, t_env *e)
+void			move_to_center(t_point *current_point)
 {
 	current_point->x = current_point->x + WIDTH / 2;
 	current_point->y = current_point->y + HEIGHT / 2;
 }
 
-static void	matrix_reset(t_env *e)
+static void		matrix_reset(t_env *e)
 {
 	int i;
 	int	j;
@@ -38,7 +38,7 @@ static void	matrix_reset(t_env *e)
 	}
 }
 
-void		tips(t_env *e)
+void			tips(t_env *e)
 {
 	mlx_string_put(e->mlx, e->win, 20, 10, 0x0033CC, "ZOOM: - || +");
 	mlx_string_put(e->mlx, e->win, 20, 30, 0x0033CC, "ROTATE_X: up || down");
@@ -49,7 +49,7 @@ void		tips(t_env *e)
 	mlx_string_put(e->mlx, e->win, 20, 130, 0x0033CC, "COLOUR: 1 || 2 || 3");
 }
 
-void		draw_each_frame(t_env *e)
+void			draw_each_frame(t_env *e)
 {
 	mlx_clear_window(e->mlx, e->win);
 	matrix_reset(e);
@@ -58,7 +58,7 @@ void		draw_each_frame(t_env *e)
 	draw_all(e);
 }
 
-int			select_scale(t_env *e)
+int				select_scale(t_env *e)
 {
 	int percent;
 	int x_val;
@@ -69,6 +69,8 @@ int			select_scale(t_env *e)
 	percent = 80;
 	x_val = (percent * WIDTH) / 100;
 	y_val = (percent * HEIGHT) / 100;
+	if (e->p_nb < 1 || e->l_nb < 1)
+		return (0);
 	x_scale = x_val / e->p_nb;
 	y_scale = y_val / e->l_nb;
 	if (x_scale > y_scale)
