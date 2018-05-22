@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   bresenham_line.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kprytkov <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/05/22 13:47:34 by kprytkov          #+#    #+#             */
+/*   Updated: 2018/05/22 13:47:36 by kprytkov         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fdf.h"
 
 static	void		ft_draw_dx(t_env *e)
@@ -17,7 +29,7 @@ static	void		ft_draw_dx(t_env *e)
 		if (error > 0)
 		{
 			y += e->step_y;
-			error += (e->dy - e->dx) << 1; 
+			error += (e->dy - e->dx) << 1;
 		}
 		else
 			error += e->dy << 1;
@@ -38,7 +50,7 @@ static	void		ft_draw_dy(t_env *e)
 	y = e->y0 + e->step_y;
 	x = e->x0;
 	i = 1;
-	mlx_pixel_put(e->mlx, e->win, e->x0, e->y0, e->line_color); 
+	mlx_pixel_put(e->mlx, e->win, e->x0, e->y0, e->line_color);
 	while (i <= e->dy)
 	{
 		if (error > 0)
@@ -48,7 +60,7 @@ static	void		ft_draw_dy(t_env *e)
 		}
 		else
 			error += e->dx << 1;
-			mlx_pixel_put(e->mlx, e->win, x, y, e->line_color); 
+		mlx_pixel_put(e->mlx, e->win, x, y, e->line_color);
 		y += e->step_y;
 		i++;
 	}
@@ -56,11 +68,10 @@ static	void		ft_draw_dy(t_env *e)
 
 void				bresenham_line(t_env *e)
 {
-	e->dx = abs(e->x1 - e->x0); 
+	e->dx = abs(e->x1 - e->x0);
 	e->dy = abs(e->y1 - e->y0);
 	e->step_x = e->x1 >= e->x0 ? 1 : -1;
-	e->step_y = e->y1 >= e->y0 ? 1 : -1; 
-
+	e->step_y = e->y1 >= e->y0 ? 1 : -1;
 	if (e->dx > e->dy)
 		ft_draw_dx(e);
 	else

@@ -12,6 +12,14 @@
 
 #include "fdf.h"
 
+
+int exit_x(void)
+{
+system("leaks a.out");
+exit(1);
+return (0);
+}
+
 int		main(int argc, char *argv[])
 {
 	t_env *e;
@@ -48,15 +56,18 @@ int		main(int argc, char *argv[])
 
 	e->mlx = mlx_init();
 	e->win = mlx_new_window(e->mlx, WIDTH, HEIGHT, "mlx 42");
-	/* ************************************************************************** */
+
 	i_will_init(e);
 	transform(e);
 	draw_all(e);
-	/* ************************************************************************** */
 
 	mlx_key_hook(e->win, key_draw, e);
 	mlx_hook(e->win, 2, 5, key_draw, e);
+
+	// int mlx_hook(e->win, int x_event, int x_mask, int (*funct)(), void *param);
 	// mlx_loop_hook(e->mlx, loop_draw, e);
+	mlx_hook(e->win, 17, 1L << 17, exit_x, NULL);
+
 	mlx_loop(e->mlx);
 	return (0);
 }

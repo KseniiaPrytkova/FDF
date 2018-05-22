@@ -89,9 +89,11 @@ void 	transform(t_env *e)
 void	set_color(t_env *e, int z)
 {
 
+int i = 0;
 	if (e->color_change == 0)
 	{
-		e->line_color = 0x33333377 + (z * 10);
+		e->line_color = 0x0033CC;
+		// e->line_color = 0x33333377 + (z * 10);
 	}
 	else if (e->color_change == 1)
 	{
@@ -102,7 +104,9 @@ void	set_color(t_env *e, int z)
 		e->line_color = random() % 16581375;
 	}
 	else if (e->color_change == 3)
+	{
 		e->line_color = 0xFFFFFF - (z * 20);
+	}
 }
 
 void	draw_all(t_env *e)
