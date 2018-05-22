@@ -14,7 +14,7 @@
 
 static int		how_many_digits(int n)
 {
-	int		counter;
+	int			counter;
 	long		positive_n;
 
 	counter = 0;
@@ -49,7 +49,7 @@ char			*ft_itoa(int n)
 {
 	char		*final_storage;
 	char		*result;
-	int		digits_nb;
+	int			digits_nb;
 	long		positive_n;
 
 	digits_nb = how_many_digits(n);

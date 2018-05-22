@@ -12,7 +12,7 @@
 
 #include "./includes/fdf.h"
 
-int		is_it_hex(char *str)
+int					is_it_hex(char *str)
 {
 	unsigned char	ch;
 	int				i;

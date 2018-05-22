@@ -40,7 +40,7 @@ static void		change_angle(int keycode, t_env *e)
 		e->angle_z -= 5;
 }
 
-int			key_draw(int keycode, t_env *e)
+int				key_draw(int keycode, t_env *e)
 {
 	if (keycode == 53)
 		exit(1);

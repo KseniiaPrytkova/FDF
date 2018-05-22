@@ -12,13 +12,12 @@
 
 #include "./includes/fdf.h"
 
-void 	i_will_init(t_env *e)
+void			i_will_init(t_env *e)
 {
 	tips(e);
 	e->move_x = WIDTH / 2;
 	e->move_y = HEIGHT / 2;
-	e->scale = select_scale(e);	
-
+	e->scale = select_scale(e);
 	e->angle_x = 0;
 	e->angle_y = 0;
 	e->angle_z = 0;
@@ -28,7 +27,6 @@ void 	i_will_init(t_env *e)
 
 static int		exit_x(void)
 {
-	system("leaks a.out");
 	exit(1);
 	return (0);
 }
@@ -48,8 +46,11 @@ static int		i_work_with_argv(t_env *e, char *s, char *name)
 	int fd;
 
 	fd = open(s, O_DIRECTORY);
-		if (fd >= 0)
-			exit(0);
+	if (fd >= 0)
+	{
+		ft_putstr("FOLDERS R NOT ALLOWED\n");
+		exit(0);
+	}
 	e->fd = open(name, O_RDONLY);
 	if (i_will_count_lines(e) != 1)
 		return (0);
@@ -62,7 +63,7 @@ static int		i_work_with_argv(t_env *e, char *s, char *name)
 	return (1);
 }
 
-int		main(int argc, char *argv[])
+int				main(int argc, char *argv[])
 {
 	t_env	*e;
 
@@ -74,7 +75,7 @@ int		main(int argc, char *argv[])
 	e->l_nb = 0;
 	e->map_name = argv[1];
 	if (argc == 2)
-	{	
+	{
 		if (!(i_work_with_argv(e, argv[1], e->map_name)))
 			return (0);
 	}
