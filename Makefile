@@ -22,14 +22,17 @@ SRC = fdf.c error_manager.c bresenham_line.c actions.c \
 INCLUDE = ./includes
 
 SRO = $(SRC:.c=.o)
+
 all: $(NAME)
 
 $(NAME): $(SRO)
 	make -C ./libft/
 	$(CC) $(FLAG) -I$(INCLUDE) $(SRC) -lmlx -framework OpenGL -framework Appkit ./libft/libft.a -o $(NAME)
 	# ar rc $(NAME) $(SRO)
-%.o: %.c
-	gcc -c -Wextra -Wall -Werror -o $@ $<
+
+%.o: %.c ./includes/fdf.h
+	$(CC) $(FLAG) -c -Wextra -Wall -Werror -o $@ $<
+
 clean:
 	make -C libft/ clean
 	rm -f $(SRO)
