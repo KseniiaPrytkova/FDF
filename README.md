@@ -140,7 +140,7 @@ I am running:
 gcc -I /Users/kprytkov/FDF/go_MinilibX main.c -L /usr/local/lib -lmlx -framework OpenGL -framework Appkit
 ```
 
-![alternativetext](go_MinilibX/sample_line_1.png)
+![alternativetext](screenshots/sample_line_1.png)
 
 Modify your main.c in this way and you will see the entire spectrum of the action of the function `ft_draw_dx()`:
 
@@ -178,7 +178,7 @@ int			main(void)
 	return (0);
 }
 ```
-![alternativetext](go_MinilibX/sample_line_2.png)
+![alternativetext](screenshots/sample_line_2.png)
 
 ### Case 2. `deltaX(x1 - x0) < deltaY(y1 - y0)` (y++)
 
@@ -218,7 +218,7 @@ int			main(void)
 	return (0);
 }
 ```
-![alternativetext](go_MinilibX/sample_line_3.png)
+![alternativetext](screenshots/sample_line_3.png)
 
 And just for fun:
 ```C
@@ -246,7 +246,7 @@ int			main(void)
 	return (0);
 }
 ```
-![alternativetext](go_MinilibX/sample_line_4.png)
+![alternativetext](screenshots/sample_line_4.png)
  view code here: [FDF/go_MinilibX/](https://github.com/KseniiaPrytkova/FDF/tree/master/go_MinilibX)
 
 #### Links
