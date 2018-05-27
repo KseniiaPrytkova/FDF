@@ -70,10 +70,11 @@ A line connects two points. It is a basic element in graphics. To draw a line, y
 Here is the structure, that i use (for your understanding of the variable names):
 
 ```С
+
 # define WIDTH 1000
 # define HEIGHT 600
 
-typedef struct	s_env
+typedef struct			s_env
 {
 	void			*mlx;
 	void			*win;
@@ -87,6 +88,7 @@ typedef struct	s_env
 	int			y1;
 	int			line_color;
 }				t_env;
+
 ```
 
 And the implementation of Bresenham's line algorithm (i split the code into several functions for clarity):
