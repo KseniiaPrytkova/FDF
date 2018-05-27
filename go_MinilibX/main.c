@@ -33,8 +33,8 @@ int			main(void)
 	color = 8388352;
 	e->mlx = mlx_init();
 	e->win = mlx_new_window(e->mlx, WIDTH, HEIGHT, "mlx 42");
-	// mlx_pixel_put(mlx_ptr, win_ptr, 50, 40, 8388352);
-	// mlx_key_hook(win_ptr, deal_key, (void *)0);
+	/* mlx_pixel_put(mlx_ptr, win_ptr, 50, 40, 8388352); */
+	/* mlx_key_hook(win_ptr, deal_key, (void *)0); */
 
 /* ************************************************************************** */
 /* basic case */
