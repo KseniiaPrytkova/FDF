@@ -42,5 +42,3 @@ fclean: clean
 	rm -Rf $(NAME)
 
 re: fclean all
-
-	
