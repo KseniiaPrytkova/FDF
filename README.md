@@ -68,6 +68,7 @@ A line connects two points. It is a basic element in graphics. To draw a line, y
 ### Case 1. _deltaX(x1 - x0) > deltaY(y1 - y0)_ (x++)
 
 Here is the structure, that i use (for your understanding of the variable names):
+
 ```С
 # define WIDTH 1000
 # define HEIGHT 600
@@ -89,6 +90,7 @@ typedef struct	s_env
 ```
 
 And the implementation of Bresenham's line algorithm (i split the code into several functions for clarity):
+
 ```С
 /* if dy <= dx */
 static	void		ft_draw_dx(t_env *e)
@@ -187,6 +189,7 @@ int			main(void)
 ```
 
 I am running:
+
 ```Shell
 gcc -I /Users/kprytkov/FDF/go_MinilibX main.c -L /usr/local/lib -lmlx -framework OpenGL -framework Appkit
 ```
@@ -272,6 +275,7 @@ int			main(void)
 ![alternativetext](screenshots/sample_line_3.png)
 
 And just for fun:
+
 ```C
 int			main(void)
 {
