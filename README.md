@@ -38,11 +38,11 @@ The project implemented a pixel-by-pixel approach, so large cards work slowly. I
     ├── transformations.c
     ├── actions.c    
     ├── next_drawing.c
-    ├── includes				# .h files are here 
+    ├── includes			# .h files are here 
     │   ├── get_next_line.h
     │   └── fdf.h
-    ├── libft					# folder with my own library of some useful functions 
-    ├── test_maps				# some maps 
+    ├── libft				# folder with my own library of some useful functions 
+    ├── test_maps			# some maps 
     ├── Makefile
     └── 
 
@@ -50,11 +50,11 @@ The project implemented a pixel-by-pixel approach, so large cards work slowly. I
 
     ├── LineUNIVERSE		# was created to improve my understanding of graphics in principle - a simple LINE and its 3d transformation in space
     ├── TriangleUNIVERSE	# a simple TRIANGLE and its 3d transformation in space (i realized its rotation on 3 axes (x, y, z) in a loop)
-    ├── go_FDF				# contains executable called `fdf` and maps
+    ├── go_FDF			# contains executable called `fdf` and maps
     ├── go_MinilibX 		# here I tested the graphics library and drew some lines
-    ├── minilibx 			# the sources of the graphic library
+    ├── minilibx 		# the sources of the graphic library
     ├── minilibx_macos		# the sources of the graphic library_macos
-    ├── screenshots			# some additional examples of how program does work
+    ├── screenshots		# some additional examples of how program does work
     └── 
 
 
