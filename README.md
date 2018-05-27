@@ -26,6 +26,7 @@
 The project implemented a pixel-by-pixel approach, so large cards work slowly. I concluded, that draw 1 pixel each time is misspend. In the following projects, i will change the approach. But for now to compile the project run `make`, u will get an executable file called `fdf` and then `./fdf test_maps/42.fdf `, where `42.fdf` is the map u want to visualize. Or you can download only the folder `go_FDF`, with executable file and maps, and simply run `./fdf test_maps/42.fdf `.
 
 > Files and folders needed for successful compilation:
+
     .
     ├── fdf.c
     ├── reader.c
@@ -43,9 +44,10 @@ The project implemented a pixel-by-pixel approach, so large cards work slowly. I
     ├── libft					# folder with my own library of some useful functions 
     ├── test_maps				# some maps 
     ├── Makefile
-    └── \
+    └── 
 
 > The purpose of other folders:
+
     ├── LineUNIVERSE		# was created to improve my understanding of graphics in principle - a simple LINE and its 3d transformation in space
     ├── TriangleUNIVERSE	# a simple TRIANGLE and its 3d transformation in space (i realized its rotation on 3 axes (x, y, z) in a loop)
     ├── go_FDF				# contains executable called `fdf` and maps
@@ -53,7 +55,7 @@ The project implemented a pixel-by-pixel approach, so large cards work slowly. I
     ├── minilibx 			# the sources of the graphic library
     ├── minilibx_macos		# the sources of the graphic library_macos
     ├── screenshots			# some additional examples of how program does work
-    └── \
+    └── 
 
 
 **_Do not forget that you can use the keyboard for various actions on the rendered image (see the legend in the graphics window). Realized such functions as: zooming; rotation around the axis X, axis Y and axis Z; changing the height of the figure; changing the color; resetting to the original rendering._**
