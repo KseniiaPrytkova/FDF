@@ -54,7 +54,7 @@ typedef struct		s_env
 	int		tmp_angle;
 	t_point		*points;
 
-}				t_env;
+}			t_env;
 
 void			bresenham_line(t_env *e);
 
