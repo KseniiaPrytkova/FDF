@@ -20,6 +20,6 @@
 # define BUFF_SIZE 17
 # define MAX_FILES 4864
 
-int		get_next_line(const int fd, char **line);
+int		   get_next_line(const int fd, char **line);
 
 #endif
