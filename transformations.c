@@ -22,7 +22,7 @@ static	void	linear(t_env *e, int i, int j, int y)
 {
 	int		p_half;
 	int		l_half;
-	double	z_val;
+	double		z_val;
 
 	e->rad_x = e->angle_x * M_PI / 180.0;
 	e->rad_y = e->angle_y * M_PI / 180.0;
