@@ -19,8 +19,8 @@
 # include <math.h>
 # include <mlx.h>
 
-# define WIDTH 	1000
-# define HEIGHT 600
+# define WIDTH 		1000
+# define HEIGHT	 	600
 
 typedef struct		s_env
 {
