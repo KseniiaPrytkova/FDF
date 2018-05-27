@@ -6,6 +6,9 @@
 ### Generate a map (Earth and some other planets:)
 [[MAP_GENERATOR]](https://github.com/jgigault/42MapGenerator)
 
+## Some samples:
+### Just 42:
+![alternativetext](screenshots/42.png)
 ### Mars landscape:
 ![alternativetext](screenshots/mars.png)
 ### Pyramid:
