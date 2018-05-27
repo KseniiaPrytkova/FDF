@@ -3,7 +3,7 @@
 ### Read about mlx:
 [[>man mlx]](https://github.com/qst0/ft_libgfx)
 
-### Generate a map (Earth and some other planets:)
+### Generate a map (Earth and some other planets):
 [[MAP_GENERATOR]](https://github.com/jgigault/42MapGenerator)
 
 ## Some samples:
@@ -21,6 +21,20 @@
 ![alternativetext](screenshots/Ukraine_2.png)
 ###  Ukraine (from NOAA (flatten ocean)): 
 ![alternativetext](screenshots/Ukraine_ocean.png)
+
+
+The project implemented a pixel-by-pixel approach, so large cards work slowly. I concluded, that draw 1 pixel each time is misspend. In the following projects, i will change the approach. But for now to compile the project run `make`, u will get an executable file called `fdf` and then `./fdf test_maps/42.fdf `, where `42.fdf` is the map u want to visualize. Or you can download only the folder `go_FDF`, with executable file and maps, and simply run `./fdf test_maps/42.fdf `.
+
+> **A:** Because you don't want to test the code, you want to test the *program*.
+
+    .
+    ├── ...
+    ├── test                    # Test files (alternatively `spec` or `tests`)
+    │   ├── benchmarks          # Load and stress tests
+    │   ├── integration         # End-to-end, integration tests (alternatively `e2e`)
+    │   └── unit                # Unit tests
+    └── ...
+
 
 ## Bresenham's line algorithm
 A line connects two points. It is a basic element in graphics. To draw a line, you need two points between which you can draw a line. And an algorithm to do this. [Bresenham's line algorithm](https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm) can use integer calculations, so it works faster than approaches with floats. This algorithm is needed in order to draw a line at any angle and in any direction (and not just proceeding from the [origin](https://en.wikipedia.org/wiki/Origin_(mathematics))). On our screen the origin is in the upper left corner of the screen: `y` increases, when we step down, `x` grows as we move to the right. Going through understanding the algorithm, becomes clear, that we have two cases: 1) `deltaX(x1 - x0) > deltaY(y1 - y0)` : `x` is increased each iteration, about `y` we should make decision - keep it same or increase by step (1 or -1: depends on direction of the line). This case draws lines only if the inclination of the line is less then 45 degrees. 2) `deltaX(x1 - x0) < deltaY(y1 - y0)` : `y` is increased each iteration, about `x` we should make decision - keep it same or increase by step (1 or -1: depends on direction of the line). This case draws lines only if the inclination of the line is more then 45 degrees. Let's visualize it.
