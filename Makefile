@@ -13,6 +13,7 @@
 NAME = fdf
 
 CC = gcc
+
 FLAG = -Wall -Werror -Wextra
 
 SRC = fdf.c error_manager.c bresenham_line.c actions.c \
