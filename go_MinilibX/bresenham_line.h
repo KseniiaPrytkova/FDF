@@ -22,20 +22,20 @@
 # define WIDTH 	1000
 # define HEIGHT 600
 
-typedef struct	s_env
+typedef struct		s_env
 {
 	void		*mlx;
 	void		*win;
-	int			step_x;
-	int			step_y;
-	int			dx;
-	int			dy;
-	int			x0;
-	int			x1;
-	int			y0;
-	int			y1;
-	int			line_color;
-}				t_env;
+	int		step_x;
+	int		step_y;
+	int		dx;
+	int		dy;
+	int		x0;
+	int		x1;
+	int		y0;
+	int		y1;
+	int		line_color;
+}			t_env;
 void			bresenham_line(t_env *e);
 
 #endif
