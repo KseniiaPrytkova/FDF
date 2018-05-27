@@ -26,7 +26,6 @@
 The project implemented a pixel-by-pixel approach, so large cards work slowly. I concluded, that draw 1 pixel each time is misspend. In the following projects, i will change the approach. But for now to compile the project run `make`, u will get an executable file called `fdf` and then `./fdf test_maps/42.fdf `, where `42.fdf` is the map u want to visualize. Or you can download only the folder `go_FDF`, with executable file and maps, and simply run `./fdf test_maps/42.fdf `.
 
 > Files and folders needed for successful compilation:
-
     .
     ├── fdf.c
     ├── reader.c
@@ -39,13 +38,27 @@ The project implemented a pixel-by-pixel approach, so large cards work slowly. I
     ├── actions.c    
     ├── next_drawing.c
     ├── includes				# .h files are here 
-    │   ├── get_next_line.h         
+    │   ├── get_next_line.h
     │   └── fdf.h
     ├── libft					# folder with my own library of some useful functions 
     ├── test_maps				# some maps 
-    ├── Makefile                                    
-    └──
+    ├── Makefile
+    └── \
 
+> The purpose of other folders:
+    ├── LineUNIVERSE		# was created to improve my understanding of graphics in principle - a simple LINE and its 3d transformation in space
+    ├── TriangleUNIVERSE	# a simple TRIANGLE and its 3d transformation in space (i realized its rotation on 3 axes (x, y, z) in a loop)
+    ├── go_FDF				# contains executable called `fdf` and maps
+    ├── go_MinilibX 		# here I tested the graphics library and drew some lines
+    ├── minilibx 			# the sources of the graphic library
+    ├── minilibx_macos		# the sources of the graphic library_macos
+    ├── screenshots			# some additional examples of how program does work
+    └── \
+
+
+**_Do not forget that you can use the keyboard for various actions on the rendered image (see the legend in the graphics window). Realized such functions as: zooming; rotation around the axis X, axis Y and axis Z; changing the height of the figure; changing the color; resetting to the original rendering._**
+
+The key algorithm of this project is Bresenham's line algorithm. Below you can find my analysis of this algorithm.
 
 ## Bresenham's line algorithm
 A line connects two points. It is a basic element in graphics. To draw a line, you need two points between which you can draw a line. And an algorithm to do this. [Bresenham's line algorithm](https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm) can use integer calculations, so it works faster than approaches with floats. This algorithm is needed in order to draw a line at any angle and in any direction (and not just proceeding from the [origin](https://en.wikipedia.org/wiki/Origin_(mathematics))). On our screen the origin is in the upper left corner of the screen: `y` increases, when we step down, `x` grows as we move to the right. Going through understanding the algorithm, becomes clear, that we have two cases: 1) `deltaX(x1 - x0) > deltaY(y1 - y0)` : `x` is increased each iteration, about `y` we should make decision - keep it same or increase by step (1 or -1: depends on direction of the line). This case draws lines only if the inclination of the line is less then 45 degrees. 2) `deltaX(x1 - x0) < deltaY(y1 - y0)` : `y` is increased each iteration, about `x` we should make decision - keep it same or increase by step (1 or -1: depends on direction of the line). This case draws lines only if the inclination of the line is more then 45 degrees. Let's visualize it.
