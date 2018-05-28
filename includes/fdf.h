@@ -20,8 +20,8 @@
 # include "../libft/libft.h"
 # include "../includes/get_next_line.h"
 
-# define WIDTH 		2000
-# define HEIGHT 	1200
+# define WIDTH 		864
+# define HEIGHT 	540
 # define MARGIN 	10
 # define ARG_FROM_X	e->x0
 # define ARG_FROM_Y	e->y0

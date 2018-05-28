@@ -63,25 +63,16 @@ void			transform(t_env *e)
 	}
 }
 
-static void		set_color(t_env *e, int z, int color)
+static void		set_color(t_env *e, int z)
 {
-	int i;
-
-	i = 0;
-
-	if (color != 0)
-		e->line_color = color;
-	else
-	{
-		if (e->color_change == 0)
-			e->line_color = 0x0033CC;
-		else if (e->color_change == 1)
-			e->line_color = 0x33673377 + (z * 10);
-		else if (e->color_change == 2)
-				e->line_color = random() % 16581375;
-		else if (e->color_change == 3)
-			e->line_color = 0xFFFFFF - (z * 20);
-	}
+	if (e->color_change == 0)
+		e->line_color = 0x0033CC;
+	else if (e->color_change == 1)
+		e->line_color = 0x33673377 + (z * 10);
+	else if (e->color_change == 2)
+		e->line_color = random() % 16581375;
+	else if (e->color_change == 3)
+		e->line_color = 0xFFFFFF - (z * 20);
 }
 
 void			draw_all(t_env *e)
@@ -95,7 +86,7 @@ void			draw_all(t_env *e)
 		j = 0;
 		while (++j < e->p_nb)
 		{
-			set_color(e, e->map[i][j].z, e->map[i][j].color);
+			set_color(e, e->map[i][j].z);
 			points_from(e, i, j);
 			if (j + 1 < e->p_nb)
 			{
