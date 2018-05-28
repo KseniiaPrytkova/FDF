@@ -6,6 +6,10 @@
 ### Generate a map (Earth and some other planets):
 [[MAP_GENERATOR]](https://github.com/jgigault/42MapGenerator)
 
+### Run on your local machine:
+1. download `go_FDF` folder;
+2. run `./fdf test_maps/map_name.fdf `
+
 ## Some samples:
 ### Just 42:
 ![alternativetext](screenshots/42.png)
