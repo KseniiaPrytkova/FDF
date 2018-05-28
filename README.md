@@ -8,7 +8,8 @@
 
 ### Run on your local machine:
 1. download `go_FDF` folder;
-2. run `./fdf test_maps/map_name.fdf `
+2. run `./fdf test_maps/map_name.fdf `;
+3. follow the legend in the upper left corner of the screen.
 
 ## Some samples:
 ### Just 42:
